@@ -210,15 +210,22 @@ textarea:focus-visible {
 
 /* ---------- Cabeçalho fixo ---------- */
 
+:root {
+  /* Altura do header fixo: única fonte, usada pelo próprio header, pelo painel
+     mobile e pelo padding-top do hero (que agora começa abaixo do header sólido). */
+  --header-h: 72px;
+}
+
 .header {
   position: fixed;
   inset-inline: 0;
   top: 0;
   z-index: 50;
-  height: 72px;
+  height: var(--header-h);
   display: flex;
   align-items: center;
-  background: transparent;
+  background: var(--color-navy);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-off-white) 10%, transparent);
   transition: background-color var(--transition-base), box-shadow var(--transition-base);
 }
 
@@ -250,6 +257,7 @@ textarea:focus-visible {
 
 .header--scrolled {
   background: var(--color-off-white);
+  border-bottom-color: transparent;
   box-shadow: var(--shadow-header);
 }
 
@@ -332,7 +340,7 @@ textarea:focus-visible {
 /* Painel de navegação mobile. */
 .nav-panel {
   position: fixed;
-  inset: 72px 0 0 0;
+  inset: var(--header-h) 0 0 0;
   z-index: 49;
   display: flex;
   flex-direction: column;
@@ -395,7 +403,8 @@ body.nav-open {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  min-height: calc(100dvh + var(--header-h));
+  padding-top: var(--header-h);
   background: var(--color-navy);
   overflow: hidden;
 }

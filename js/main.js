@@ -125,7 +125,10 @@
       function (entries) {
         header.classList.toggle("header--scrolled", !entries[0].isIntersecting);
       },
-      { rootMargin: "-72px 0px 0px 0px", threshold: 0 }
+      // O hero agora é 72px (--header-h) mais alto que a tela para abrir espaço
+      // pro header sólido, então o sentinela (logo depois do hero) descansa 72px
+      // além do que a margem de baixo cobre por padrão: expande-a no mesmo valor.
+      { rootMargin: "-72px 0px 72px 0px", threshold: 0 }
     );
     observer.observe(sentinel);
   }
