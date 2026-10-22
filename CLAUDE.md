@@ -88,21 +88,17 @@ Extraído do site atual, da apresentação comercial e da logo. Não inventar na
 - **Missão**: cuidamos de cada detalhe do projeto, da produção e da montagem para que você foque no que realmente importa: conquistar e encantar seus clientes.
 - **CTA final**: "Pronto para se destacar?" + "Nossa equipe cuida de tudo, do projeto à desmontagem."
 - **Clientes atendidos**: Perego / Lentes Correct, Almata Química, Kerootica, Obra Prima, KX3, Metalring / AGEL, Geloni, Schultz.
+- **Nome no texto**: Conceito Stands. A logo continua "Conceito Feiras e Eventos" (marca gráfica, não muda).
+- **Tempo de mercado**: mais de 10 anos.
+- **Contatos**: Lucas Jactchak (41) 99697-4677, destino dos orçamentos; Marco Orasmo (41) 99666-6865, marco@conceitostands.com.br.
+- **Instagram**: @conceito.stands.
+- **Localização**: Bacacheri, Curitiba - PR. Horário: seg a sex, 8h às 18h. Endereço completo não é publicado (é residencial).
 
 ## Pendências: NÃO decidir, usar placeholder
 
-Conflitos de fonte que só o cliente resolve. Todos os placeholders ficam centralizados em **um único objeto de configuração em `js/config.js`**, para troca em um lugar só.
+O cliente já fechou todas as pendências de conteúdo (nomes, contatos, tempo de mercado, Instagram e localização: ver Conteúdo aprovado acima). Resta apenas esta:
 
-| Placeholder | Conflito |
-|---|---|
-| `[ANOS]` | Site diz "mais de 10". Apresentação diz "30". |
-| `[NOME NO TEXTO]` | Logo diz "Conceito Feiras e Eventos". Domínio e apresentação dizem "Conceito Stands". |
-| `[CONTATO NOME]`, `[WHATSAPP]` | Site traz Marco Orasmo, (41) 99666-6865. Apresentação traz Lucas Jactchak, (41) 99697-4677. |
-| `[EMAIL]` | Encontrado no rodapé do site atual: marco@conceitostands.com.br, vinculado ao contato de Marco Orasmo. Não confirmado pelo cliente como e-mail definitivo (pode haver outro vinculado a Lucas Jactchak). Continua `[EMAIL]` até a decisão. |
-| `[INSTAGRAM]` | @conceito.stands ou @conceitofe. |
-| `[ENDERECO]` | Não informado em nenhuma fonte. |
-
-Fotos: todas as fotos atualmente no projeto (`assets/img/pdf` e `assets/img/site`) são provisórias. Fotos originais em alta resolução foram solicitadas ao cliente. Substituir assim que chegarem (lista de trocas por seção em `DESIGN.md`).
+- **Fotos**: todas as fotos atualmente no projeto (`assets/img/pdf` e `assets/img/site`) são provisórias. Fotos originais em alta resolução foram solicitadas ao cliente. Substituir assim que chegarem (lista de trocas por seção em `DESIGN.md`).
 
 ## Regras do projeto
 
@@ -119,8 +115,8 @@ index.html      página única, HTML/CSS/JS puros (ver DESIGN.md para o plano se
 css/
   style.css     importa assets/brand/css/tokens.css, não redefine cor ou fonte fora dos tokens
 js/
-  config.js     objeto único com todos os placeholders de conteúdo (ver tabela de pendências acima)
-  main.js       preenche placeholders, menu mobile, troca do header, formulário de orçamento, JSON-LD
+  config.js     objeto único com o conteúdo definitivo (nomes, contatos, Instagram, endereço, horário)
+  main.js       preenche o conteúdo de config.js, menu mobile, troca do header, formulário de orçamento, JSON-LD
 assets/
   brand/        cópia de ./conceito-identidade (logo, tokens, fontes, favicon, social, gráficos)
   img/

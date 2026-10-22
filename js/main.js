@@ -14,16 +14,11 @@
     return parts[2] + "/" + parts[1] + "/" + parts[0];
   }
 
-  // Placeholder ainda não resolvido pelo cliente, ex. "[EMAIL]" (ver CLAUDE.md, Pendências).
-  function isPlaceholder(value) {
-    return /^\[.*\]$/.test((value || "").toString().trim());
-  }
-
-  function buildWhatsAppUrl(message) {
-    var phone = digitsOnly(CFG.WHATSAPP);
+  function buildWhatsAppUrl(message, phone) {
+    var digits = digitsOnly(phone || CFG.WHATSAPP_PRINCIPAL);
     var text = encodeURIComponent(message);
-    return phone
-      ? "https://wa.me/" + phone + "?text=" + text
+    return digits
+      ? "https://wa.me/" + digits + "?text=" + text
       : "https://wa.me/?text=" + text;
   }
 
@@ -47,16 +42,44 @@
   }
 
   function wireContactLinks() {
-    var emailLink = document.querySelector("[data-cfg-email]");
-    if (emailLink && !isPlaceholder(CFG.EMAIL)) {
-      emailLink.setAttribute("href", "mailto:" + CFG.EMAIL);
-    }
-
     var instaLink = document.querySelector("[data-cfg-instagram]");
-    if (instaLink && !isPlaceholder(CFG.INSTAGRAM)) {
+    if (instaLink) {
       var handle = (CFG.INSTAGRAM || "").toString().replace("@", "").trim();
       instaLink.setAttribute("href", "https://instagram.com/" + handle);
     }
+  }
+
+  function renderFooterContacts() {
+    var container = document.querySelector("[data-contatos]");
+    if (!container || !Array.isArray(CFG.CONTATOS)) return;
+
+    container.replaceChildren();
+
+    CFG.CONTATOS.forEach(function (contato) {
+      var entry = document.createElement("div");
+      entry.className = "footer__contact-entry";
+
+      var nome = document.createElement("p");
+      nome.className = "footer__contact-nome";
+      nome.textContent = contato.nome;
+      entry.appendChild(nome);
+
+      var telefoneLink = document.createElement("a");
+      telefoneLink.href = buildWhatsAppUrl(DEFAULT_MESSAGE, contato.whatsapp);
+      telefoneLink.target = "_blank";
+      telefoneLink.rel = "noopener noreferrer";
+      telefoneLink.textContent = contato.telefone;
+      entry.appendChild(telefoneLink);
+
+      if (contato.email) {
+        var emailLink = document.createElement("a");
+        emailLink.href = "mailto:" + contato.email;
+        emailLink.textContent = contato.email;
+        entry.appendChild(emailLink);
+      }
+
+      container.appendChild(entry);
+    });
   }
 
   function setFooterYear() {
@@ -177,35 +200,35 @@
   }
 
   function injectLocalBusinessSchema() {
-    // Nunca publica placeholder tipo "[EMAIL]" nos dados estruturados: só entra
-    // no JSON-LD o que o cliente já confirmou (ver CLAUDE.md, Pendências).
+    // Endereço completo não entra aqui: é residencial, não publicado (ver CLAUDE.md).
     var schema = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       name: CFG.NOME_NO_TEXTO,
       image: "assets/brand/social/og-image.png",
-      areaServed: "Curitiba, PR",
-      url: window.location.href,
-    };
-
-    if (!isPlaceholder(CFG.WHATSAPP)) {
-      schema.telephone = CFG.WHATSAPP;
-    }
-    if (!isPlaceholder(CFG.EMAIL)) {
-      schema.email = CFG.EMAIL;
-    }
-    if (!isPlaceholder(CFG.ENDERECO)) {
-      schema.address = {
+      telephone: "+55 41 99697-4677",
+      email: "marco@conceitostands.com.br",
+      address: {
         "@type": "PostalAddress",
-        streetAddress: CFG.ENDERECO,
         addressLocality: "Curitiba",
         addressRegion: "PR",
         addressCountry: "BR",
-      };
-    }
-    if (!isPlaceholder(CFG.INSTAGRAM)) {
-      schema.sameAs = ["https://instagram.com/" + (CFG.INSTAGRAM || "").replace("@", "")];
-    }
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: -25.3912917,
+        longitude: -49.2243121,
+      },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "18:00",
+      },
+      areaServed: "Curitiba e região",
+      sameAs: ["https://www.instagram.com/conceito.stands/"],
+      url: window.location.href,
+    };
 
     var script = document.createElement("script");
     script.type = "application/ld+json";
@@ -217,6 +240,7 @@
     fillPlaceholders();
     wireWhatsAppLinks();
     wireContactLinks();
+    renderFooterContacts();
     setFooterYear();
     setupMobileMenu();
     setupHeaderScroll();
