@@ -103,6 +103,10 @@
   // ---------- 5. Diferenciais: entrada por linha a 75% + parallax interno na foto ----------
 
   function initDiferenciais(isDesktop) {
+    // No mobile os cards viraram um carrossel horizontal: uma entrada disparada
+    // por scroll vertical (e o parallax interno) não fazem sentido mais ali.
+    if (!isDesktop) return;
+
     gsap.utils.toArray(".diferencial").forEach(function (row, i) {
       var media = row.querySelector(".diferencial__media");
       var img = media ? media.querySelector("img") : null;
@@ -113,21 +117,13 @@
         scrollTrigger: { trigger: row, start: "top 75%", once: true },
       });
 
-      if (isDesktop) {
-        tl.from(media, { autoAlpha: 0, x: photoFromLeft ? -48 : 48, duration: 0.7, ease: "power3.out" }).from(
-          text,
-          { autoAlpha: 0, y: 20, duration: 0.5, ease: "power2.out" },
-          "-=0.35"
-        );
-      } else {
-        tl.from(media, { autoAlpha: 0, y: 24, duration: 0.5, ease: "power2.out" }).from(
-          text,
-          { autoAlpha: 0, y: 16, duration: 0.4, ease: "power2.out" },
-          "-=0.2"
-        );
-      }
+      tl.from(media, { autoAlpha: 0, x: photoFromLeft ? -48 : 48, duration: 0.7, ease: "power3.out" }).from(
+        text,
+        { autoAlpha: 0, y: 20, duration: 0.5, ease: "power2.out" },
+        "-=0.35"
+      );
 
-      if (isDesktop && img) {
+      if (img) {
         gsap.set(img, { scale: 1.15 });
         gsap.to(img, {
           y: 36,
@@ -180,6 +176,10 @@
   // ---------- 7. Portfólio: fade + scale, stagger 40ms, uma vez + parallax nas fotos largas ----------
 
   function initPortfolio(isDesktop) {
+    // Mesmo motivo do Diferenciais: no mobile isso é um carrossel horizontal,
+    // sem relação com a posição vertical de scroll que dispararia a entrada.
+    if (!isDesktop) return;
+
     var items = gsap.utils.toArray(".portfolio__item");
     revealOnce(
       items,
@@ -187,17 +187,15 @@
       { trigger: ".portfolio__grid", start: "top 85%" }
     );
 
-    if (isDesktop) {
-      gsap.utils.toArray(".portfolio__item--wide .portfolio__frame img").forEach(function (img) {
-        // Desliga a transição CSS de hover para o scrub não brigar com ela.
-        gsap.set(img, { scale: 1.1, transition: "none" });
-        gsap.to(img, {
-          y: 24,
-          ease: "none",
-          scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: 0.6 },
-        });
+    gsap.utils.toArray(".portfolio__item--wide .portfolio__frame img").forEach(function (img) {
+      // Desliga a transição CSS de hover para o scrub não brigar com ela.
+      gsap.set(img, { scale: 1.1, transition: "none" });
+      gsap.to(img, {
+        y: 24,
+        ease: "none",
+        scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: 0.6 },
       });
-    }
+    });
   }
 
   // ---------- 8. Manifesto: palavra por palavra em scrub + parallax horizontal na marca d'água ----------

@@ -141,13 +141,90 @@
       return;
     }
 
-    var observer = new IntersectionObserver(
+    // No mobile, o botão flutuante fica em cima do botão de enviar do formulário
+    // quando a seção #contato está na tela: esconde nesse caso, só no mobile.
+    var contato = document.getElementById("contato");
+    var mobileQuery = window.matchMedia("(max-width: 47.99rem)");
+    var pastHero = false;
+    var inContato = false;
+
+    function updateVisibility() {
+      var hideForContato = mobileQuery.matches && inContato;
+      fab.classList.toggle("is-visible", pastHero && !hideForContato);
+    }
+
+    var heroObserver = new IntersectionObserver(
       function (entries) {
-        fab.classList.toggle("is-visible", !entries[0].isIntersecting);
+        pastHero = !entries[0].isIntersecting;
+        updateVisibility();
       },
       { threshold: 0 }
     );
-    observer.observe(hero);
+    heroObserver.observe(hero);
+
+    if (contato) {
+      var contatoObserver = new IntersectionObserver(
+        function (entries) {
+          inContato = entries[0].isIntersecting;
+          updateVisibility();
+        },
+        { threshold: 0 }
+      );
+      contatoObserver.observe(contato);
+    }
+  }
+
+  // Contador "1 / N" dos carrosséis mobile (Diferenciais e Portfólio), via
+  // IntersectionObserver: marca o card mais visível dentro da lista como atual.
+  function setupCarouselCounter(listSelector, itemSelector, counterSelector) {
+    var list = document.querySelector(listSelector);
+    var counter = document.querySelector(counterSelector);
+    if (!list || !counter || !("IntersectionObserver" in window)) return;
+
+    var items = Array.prototype.slice.call(list.querySelectorAll(itemSelector));
+    if (!items.length) return;
+    var total = items.length;
+
+    function updateCounter(index) {
+      counter.textContent = index + 1 + " / " + total;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        var best = null;
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && (!best || entry.intersectionRatio > best.intersectionRatio)) {
+            best = entry;
+          }
+        });
+        if (best) {
+          var index = items.indexOf(best.target);
+          if (index !== -1) updateCounter(index);
+        }
+      },
+      { root: list, threshold: [0.5, 0.6, 0.7, 0.8, 0.9, 1] }
+    );
+    items.forEach(function (item) {
+      observer.observe(item);
+    });
+  }
+
+  // "Arraste para ver mais" do carrossel de portfólio: some depois do primeiro arraste.
+  // Ouve "pointerdown" (início real de um toque/arraste), não "scroll": o
+  // scroll-snap corrige a posição sozinho ao carregar a página e dispara um
+  // evento de scroll sem o usuário tocar em nada, o que escondia a dica cedo demais.
+  function setupSwipeHint(carouselSelector, hintSelector) {
+    var carousel = document.querySelector(carouselSelector);
+    var hint = document.querySelector(hintSelector);
+    if (!carousel || !hint) return;
+
+    carousel.addEventListener(
+      "pointerdown",
+      function () {
+        hint.classList.add("is-hidden");
+      },
+      { once: true, passive: true }
+    );
   }
 
   function setupQuoteForm() {
@@ -250,5 +327,8 @@
     setupWhatsAppFab();
     setupQuoteForm();
     injectLocalBusinessSchema();
+    setupCarouselCounter(".diferenciais__list", ".diferencial", ".diferenciais__counter");
+    setupCarouselCounter(".portfolio__grid", ".portfolio__item", ".portfolio__counter");
+    setupSwipeHint(".portfolio__grid", ".portfolio__hint");
   });
 })();
