@@ -92,7 +92,7 @@ Extraído do site atual, da apresentação comercial e da logo. Não inventar na
 - **Tempo de mercado**: mais de 10 anos.
 - **Contatos**: Lucas Jactchak (41) 99697-4677, destino dos orçamentos; Marco Orasmo (41) 99666-6865, marco@conceitostands.com.br.
 - **Instagram**: @conceito.stands.
-- **Localização**: Bacacheri, Curitiba - PR. Horário: seg a sex, 8h às 18h. Endereço completo não é publicado (é residencial).
+- **Localização**: mapa do Google Maps no rodapé (perfil "Conceito Stands", https://maps.app.goo.gl/TDenwAQ8dSWAmT8z7). Endereço e horário não aparecem em texto no site.
 
 ## Pendências: NÃO decidir, usar placeholder
 

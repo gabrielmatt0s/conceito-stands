@@ -306,6 +306,7 @@
         closes: "18:00",
       },
       areaServed: "Curitiba e região",
+      hasMap: "https://maps.app.goo.gl/TDenwAQ8dSWAmT8z7",
       sameAs: ["https://www.instagram.com/conceito.stands/"],
       url: window.location.href,
     };

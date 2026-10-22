@@ -1037,14 +1037,37 @@ body.nav-open {
 }
 
 .footer__list a,
-.footer__contact a {
+.footer__contact a,
+.footer__social,
+.footer__map-link {
   color: var(--color-teal);
 }
 
 .footer__list a:hover,
-.footer__contact a:hover {
+.footer__contact a:hover,
+.footer__social:hover,
+.footer__map-link:hover {
   color: var(--color-navy);
   text-decoration: underline;
+}
+
+.footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.footer__map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.footer__map-link {
+  display: inline-block;
+  margin-top: var(--space-3);
 }
 
 .footer__contact {
@@ -1083,7 +1106,10 @@ body.nav-open {
 
 @media (min-width: 64rem) {
   .footer__grid {
-    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    /* minmax(0, Nfr) força a proporção real: sem isso, colunas com conteúdo mais
+       largo (telefones, e-mail) tomam mais espaço do que a fração pedida e o
+       mapa (Localização) não fica com o dobro de largura das outras na prática. */
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
   }
 }
 

@@ -15,6 +15,4 @@ window.CONCEITO_CONFIG = {
   ],
 
   INSTAGRAM: "@conceito.stands",
-  ENDERECO: "Bacacheri, Curitiba - PR",
-  HORARIO: "Segunda a sexta, das 8h às 18h",
 };
