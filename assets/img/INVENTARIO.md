@@ -22,6 +22,30 @@ Critério de uso: **hero** exige largura mínima 1600px; **card** exige mínima 
 | `simbolo-decorativo-p01.png` | p.1 e p.6 (duplicada, 1 cópia removida) | 258x258 | Símbolo "C" circular decorativo nas cores da marca, usado como elemento gráfico na apresentação | **miniatura**, abaixo do mínimo de card, usar como ícone/selo, não como foto |
 | `textura-fundo-quase-vazia-p02.png` | p.2 | 1500x553 | Elemento quase todo branco/transparente, provável textura ou fundo decorativo da apresentação | **descartar**, sem conteúdo fotográfico útil |
 
+> **Atualização:** as linhas `producao-marcenaria-corte-p02`, `producao-equipe-tablet-p02`, `producao-montagem-parafusadeira-p02`, `stand-perego-correct-feira-p03`, `stand-perego-correct-feira-alt-p05`, `stand-kx3-p05`, `stand-metalring-agel-p05`, `stand-almata-quimica-feicon2026-p05` e `stand-obra-prima-expoapras2026-p05` abaixo descrevem material já **substituído e removido do repositório**: o cliente enviou o banco de mídia original (Drive "Banco de imagens"), ver seção `assets/img/v2/` e `assets/video/` logo abaixo. `stand-schultz-maxtech-p05`, `stand-kerootica-expooptica2026-p05` e `stand-geloni-expoapras2026-p05` seguem válidas: Schultz foi substituída (ver nova seção), Kerootica e Geloni continuam em uso (`assets/img/portfolio/`).
+
+## `assets/img/v2/` e `assets/video/`: banco de mídia original do cliente (Drive "Banco de imagens")
+
+Mídias já processadas e otimizadas pelo cliente (WebP qualidade equivalente, variante `-sm` menor para cada foto; vídeo em H.264 e VP9). Não reprocessar.
+
+| Arquivo | Resolução | O que mostra | Uso |
+|---|---|---|---|
+| `video/hero-montagem.mp4`, `video/hero-montagem.webm` | 720x1280 (vertical), 12,9s, sem áudio | Montagem de um stand, em vídeo | **hero**, fundo do vídeo (substitui a foto estática do Perego) |
+| `video/hero-montagem-poster.webp` | 720x1280 | Último quadro do vídeo acima (stand de hexágonos) | **hero**, pôster/fallback do vídeo |
+| `img/v2/diferencial-grafica-acabamento.webp` (+ `-sm`) | 1080x1920 | Equipe instalando acabamento de um stand | **card**, seção "Gráfica interna" |
+| `img/v2/diferencial-estruturas.webp` (+ `-sm`) | 1600x900 | Portal de LED de um estande | **card**, seção "Estruturas modernas" |
+| `img/v2/diferencial-equipe.webp` (+ `-sm`) | 1080x1440 | Montador com camiseta da Conceito | **card**, seção "Equipe dedicada" |
+| `img/v2/portfolio-formlabs-3dcriar.webp` (+ `-sm`) | 1600x900 | Estande 3D Criar / Formlabs, Expo+ Indústria | **card**, galeria de portfólio, célula de destaque |
+| `img/v2/portfolio-kx3.webp` (+ `-sm`) | 1600x900 | Estande KX3 Acessórios Automotivos, Autopar 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-diesel-4x4import.webp` (+ `-sm`) | 1600x900 | Estande Diesel Venom / 4x4 Import, Autopar 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-metalring-agel.webp` (+ `-sm`) | 1600x900 | Estande Metalring / AGEL, Autopar 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-schultz.webp` (+ `-sm`) | 1080x1920 | Estande Schultz Max Tech, Autopar 2026 (foto vertical) | **card**, galeria de portfólio |
+| `img/v2/portfolio-linares.webp` (+ `-sm`) | 1600x900 | Estande Grupo Linares, Lignum | **card**, galeria de portfólio |
+| `img/v2/portfolio-m2-ferramentas.webp` (+ `-sm`) | 1600x900 | Estande M2 Ferramentas, Lignum | **card**, galeria de portfólio |
+| `img/v2/portfolio-colecao-moda.webp` (+ `-sm`) | 1600x900 | Estande Coleção.Moda, Febratex 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-automatisa.webp` (+ `-sm`) | 1600x900 | Estande Automatisa, Febratex 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-sanex.webp` (+ `-sm`) | 1156x1012 | Estande Sanex, Expo+ Indústria | **card**, galeria de portfólio |
+
 ## `assets/img/site/`: baixadas de `conceitostands.com.br` (site atual)
 
 | Arquivo | Origem no site | Resolução | O que mostra | Uso recomendado |

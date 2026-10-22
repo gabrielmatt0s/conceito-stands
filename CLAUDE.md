@@ -98,7 +98,7 @@ Extraído do site atual, da apresentação comercial e da logo. Não inventar na
 
 O cliente já fechou todas as pendências de conteúdo (nomes, contatos, tempo de mercado, Instagram e localização: ver Conteúdo aprovado acima). Resta apenas esta:
 
-- **Fotos**: todas as fotos atualmente no projeto (`assets/img/pdf` e `assets/img/site`) são provisórias. Fotos originais em alta resolução foram solicitadas ao cliente. Substituir assim que chegarem (lista de trocas por seção em `DESIGN.md`).
+- **Mídia original do cliente integrada** (Drive "Banco de imagens"). Fotos antigas restantes: Kerootica e Geloni (resolução de PDF).
 
 ## Regras do projeto
 

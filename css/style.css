@@ -121,6 +121,7 @@ textarea:focus-visible {
 .header a:focus-visible,
 .header button:focus-visible,
 .hero a:focus-visible,
+.hero button:focus-visible,
 #contato button:focus-visible,
 #contato input:focus-visible,
 .whatsapp-fab:focus-visible {
@@ -418,18 +419,49 @@ body.nav-open {
   background: var(--color-navy);
 }
 
-.hero__media img {
-  /* Centralizada com inset + margin auto, nunca maior que a resolução nativa (1081x1440):
-     o navy do container preenche qualquer espaço excedente em vez de ampliar a foto. */
+.hero__video {
   position: absolute;
   inset: 0;
-  margin: auto;
   width: 100%;
   height: 100%;
-  max-width: 1081px;
-  max-height: 1440px;
   object-fit: cover;
-  object-position: center 30%;
+}
+
+.hero__video-toggle {
+  position: absolute;
+  z-index: 2;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-navy) 55%, transparent);
+  color: var(--color-off-white);
+  transition: background-color var(--transition-base);
+}
+
+.hero__video-toggle:hover {
+  background: color-mix(in srgb, var(--color-navy) 75%, transparent);
+}
+
+.hero__video-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hero__video-toggle .icon-play {
+  display: none;
+}
+
+.hero__video-toggle.is-paused .icon-pause {
+  display: none;
+}
+
+.hero__video-toggle.is-paused .icon-play {
+  display: block;
 }
 
 .hero__media::after {
@@ -687,6 +719,12 @@ body.nav-open {
   object-fit: cover;
 }
 
+/* A foto vertical da equipe tem o capacete perto do topo: sem esse ajuste,
+   o corte central do object-fit: cover cortava a cabeça. */
+.diferencial__media--top img {
+  object-position: center 25%;
+}
+
 .diferencial__media::after {
   content: "";
   position: absolute;
@@ -876,6 +914,18 @@ body.nav-open {
   opacity: 0.85;
 }
 
+.portfolio__client {
+  display: block;
+}
+
+.portfolio__fair {
+  display: block;
+  margin-top: var(--space-1, .25rem);
+  opacity: 0.75;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
 .portfolio__counter,
 .portfolio__hint {
   display: none;
@@ -884,6 +934,9 @@ body.nav-open {
 @media (min-width: 40rem) {
   .portfolio__grid {
     grid-template-columns: repeat(4, 1fr);
+    /* Preenche buracos deixados pelos itens maiores (feature, tall) puxando
+       os itens seguintes pra cima, em vez de deixar células vazias. */
+    grid-auto-flow: dense;
   }
 
   .portfolio__item--wide {
@@ -894,6 +947,23 @@ body.nav-open {
     /* 8/3 mantém a mesma altura de frame que o item normal (4/3) na mesma linha,
        já que o item largo ocupa o dobro da largura (2 colunas). */
     aspect-ratio: 8 / 3;
+  }
+
+  .portfolio__item--feature {
+    /* Célula de destaque: 2 colunas x 2 linhas. Proporção 2x2 sobre uma base
+       4/3 continua 4/3 (mesma lógica multiplicativa do --wide acima), então o
+       frame não precisa de aspect-ratio próprio. */
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .portfolio__item--tall {
+    grid-row: span 2;
+  }
+
+  .portfolio__item--tall .portfolio__frame {
+    /* 1 coluna x 2 linhas sobre a base 4/3: (1*4)/(2*3) = 2/3. */
+    aspect-ratio: 2 / 3;
   }
 }
 
@@ -1383,7 +1453,8 @@ body.nav-open {
   }
 
   .portfolio__frame,
-  .portfolio__item--wide .portfolio__frame {
+  .portfolio__item--wide .portfolio__frame,
+  .portfolio__item--tall .portfolio__frame {
     aspect-ratio: 4 / 5;
   }
 

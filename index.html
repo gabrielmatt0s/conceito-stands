@@ -30,12 +30,10 @@
   <link rel="preload" href="assets/brand/css/fonts/BebasNeue-Regular-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/brand/css/fonts/Montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  <!-- Imagem do hero, prioridade alta de carregamento -->
+  <!-- Pôster do vídeo do hero, prioridade alta de carregamento -->
   <link
     rel="preload"
-    href="assets/img/pdf/stand-perego-correct-feira-p03.webp"
-    imagesrcset="assets/img/pdf/stand-perego-correct-feira-p03.webp 1081w, assets/img/pdf/stand-perego-correct-feira-p03-800w.webp 800w"
-    imagesizes="(min-width: 64rem) 48vw, 100vw"
+    href="assets/video/hero-montagem-poster.webp"
     as="image"
     fetchpriority="high"
   />
@@ -93,15 +91,28 @@
   <main id="conteudo-principal">
     <section class="hero" id="hero" aria-labelledby="hero-heading">
       <div class="hero__media">
-        <img
-          src="assets/img/pdf/stand-perego-correct-feira-p03.webp"
-          srcset="assets/img/pdf/stand-perego-correct-feira-p03.webp 1081w, assets/img/pdf/stand-perego-correct-feira-p03-800w.webp 800w"
-          sizes="(min-width: 64rem) 48vw, 100vw"
-          alt="Stand montado pela Conceito para Perego e Lentes Correct em um pavilhão de feira"
-          width="1081"
-          height="1440"
-          fetchpriority="high"
-        />
+        <video
+          class="hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="assets/video/hero-montagem-poster.webp"
+          aria-hidden="true"
+        >
+          <source src="assets/video/hero-montagem.webm" type="video/webm" />
+          <source src="assets/video/hero-montagem.mp4" type="video/mp4" />
+        </video>
+        <button class="hero__video-toggle" type="button" aria-label="Pausar vídeo">
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" rx="1" />
+            <rect x="14" y="5" width="4" height="14" rx="1" />
+          </svg>
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 4.5v15l12-7.5-12-7.5z" />
+          </svg>
+        </button>
       </div>
 
       <div class="hero__content">
@@ -141,6 +152,14 @@
           <span class="clients__item">Metalring / AGEL <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
           <span class="clients__item">Geloni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
           <span class="clients__item">Schultz <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">3D Criar <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Diesel Venom <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">4x4 Import <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Grupo Linares <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">M2 Ferramentas <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Coleção.Moda <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Automatisa <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Sanex <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
         </div>
         <div class="clients__group" aria-hidden="true">
           <span class="clients__item">Perego / Lentes Correct <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
@@ -151,6 +170,14 @@
           <span class="clients__item">Metalring / AGEL <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
           <span class="clients__item">Geloni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
           <span class="clients__item">Schultz <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">3D Criar <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Diesel Venom <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">4x4 Import <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Grupo Linares <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">M2 Ferramentas <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Coleção.Moda <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Automatisa <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Sanex <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
         </div>
       </div>
     </section>
@@ -200,12 +227,12 @@
           <article class="diferencial" tabindex="0">
             <div class="diferencial__media">
               <img
-                src="assets/img/pdf/producao-marcenaria-corte-p02.webp"
-                srcset="assets/img/pdf/producao-marcenaria-corte-p02.webp 908w, assets/img/pdf/producao-marcenaria-corte-p02-800w.webp 800w"
+                src="assets/img/v2/diferencial-grafica-acabamento.webp"
+                srcset="assets/img/v2/diferencial-grafica-acabamento.webp 1080w, assets/img/v2/diferencial-grafica-acabamento-sm.webp 600w"
                 sizes="(min-width: 56rem) 46vw, 100vw"
-                alt="Marceneiro da Conceito cortando madeira na oficina de produção"
-                width="908"
-                height="1210"
+                alt="Equipe da Conceito instalando o acabamento final de um stand"
+                width="1080"
+                height="1920"
                 loading="lazy"
               />
             </div>
@@ -218,12 +245,12 @@
           <article class="diferencial" tabindex="0">
             <div class="diferencial__media">
               <img
-                src="assets/img/pdf/producao-montagem-parafusadeira-p02.webp"
-                srcset="assets/img/pdf/producao-montagem-parafusadeira-p02.webp 908w, assets/img/pdf/producao-montagem-parafusadeira-p02-800w.webp 800w"
+                src="assets/img/v2/diferencial-estruturas.webp"
+                srcset="assets/img/v2/diferencial-estruturas.webp 1600w, assets/img/v2/diferencial-estruturas-sm.webp 800w"
                 sizes="(min-width: 56rem) 46vw, 100vw"
-                alt="Montador da Conceito usando parafusadeira em peça de MDF na oficina"
-                width="908"
-                height="1210"
+                alt="Portal de LED estruturado pela Conceito em um estande de feira"
+                width="1600"
+                height="900"
                 loading="lazy"
               />
             </div>
@@ -234,14 +261,14 @@
           </article>
 
           <article class="diferencial" tabindex="0">
-            <div class="diferencial__media">
+            <div class="diferencial__media diferencial__media--top">
               <img
-                src="assets/img/pdf/producao-equipe-tablet-p02.webp"
-                srcset="assets/img/pdf/producao-equipe-tablet-p02.webp 908w, assets/img/pdf/producao-equipe-tablet-p02-800w.webp 800w"
+                src="assets/img/v2/diferencial-equipe.webp"
+                srcset="assets/img/v2/diferencial-equipe.webp 1080w, assets/img/v2/diferencial-equipe-sm.webp 600w"
                 sizes="(min-width: 56rem) 46vw, 100vw"
-                alt="Equipe da Conceito revisando o projeto do stand em um tablet na oficina"
-                width="908"
-                height="1210"
+                alt="Montador da Conceito com camiseta da marca em um estande de feira"
+                width="1080"
+                height="1440"
                 loading="lazy"
               />
             </div>
@@ -296,100 +323,192 @@
         <h2 class="section__heading" id="portfolio-heading">Portfólio</h2>
 
         <div class="portfolio__grid" role="region" aria-label="Portfólio da Conceito, carrossel" tabindex="0">
-          <figure class="portfolio__item" tabindex="0">
+          <figure class="portfolio__item portfolio__item--feature" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/pdf/stand-perego-correct-feira-alt-p05.webp"
-                alt="Stand da Perego e Lentes Correct montado pela Conceito em uma feira"
-                width="721"
-                height="960"
+                src="assets/img/v2/portfolio-formlabs-3dcriar.webp"
+                srcset="assets/img/v2/portfolio-formlabs-3dcriar.webp 1600w, assets/img/v2/portfolio-formlabs-3dcriar-sm.webp 800w"
+                sizes="(min-width: 40rem) 50vw, 85vw"
+                alt="Estande da 3D Criar e Formlabs montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
                 loading="lazy"
               />
             </div>
-            <figcaption class="portfolio__caption">Perego / Lentes Correct</figcaption>
-          </figure>
-
-          <figure class="portfolio__item portfolio__item--wide" tabindex="0">
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/pdf/stand-kx3-p05.webp"
-                srcset="assets/img/pdf/stand-kx3-p05.webp 1210w, assets/img/pdf/stand-kx3-p05-800w.webp 800w"
-                sizes="50vw"
-                alt="Stand da KX3 Acessórios Automotivos montado pela Conceito em uma feira"
-                width="1210"
-                height="681"
-                loading="lazy"
-              />
-            </div>
-            <figcaption class="portfolio__caption">KX3</figcaption>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">3D Criar · Formlabs</span>
+              <span class="portfolio__fair">Expo+ Indústria</span>
+            </figcaption>
           </figure>
 
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/portfolio/portfolio-almata-quimica.webp"
-                srcset="assets/img/portfolio/portfolio-almata-quimica.webp 1013w, assets/img/portfolio/portfolio-almata-quimica-800w.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 50vw"
-                alt="Stand da Almata Química montado pela Conceito na Feicon"
-                width="1013"
-                height="1076"
+                src="assets/img/v2/portfolio-kx3.webp"
+                srcset="assets/img/v2/portfolio-kx3.webp 1600w, assets/img/v2/portfolio-kx3-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da KX3 Acessórios Automotivos montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
                 loading="lazy"
               />
             </div>
-            <figcaption class="portfolio__caption">Almata Química</figcaption>
-          </figure>
-
-          <figure class="portfolio__item portfolio__item--wide" tabindex="0">
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/pdf/stand-metalring-agel-p05.webp"
-                srcset="assets/img/pdf/stand-metalring-agel-p05.webp 1210w, assets/img/pdf/stand-metalring-agel-p05-800w.webp 800w"
-                sizes="50vw"
-                alt="Stand da Metalring e AGEL montado pela Conceito em uma feira"
-                width="1210"
-                height="681"
-                loading="lazy"
-              />
-            </div>
-            <figcaption class="portfolio__caption">Metalring / AGEL</figcaption>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">KX3 Acessórios Automotivos</span>
+              <span class="portfolio__fair">Autopar 2026</span>
+            </figcaption>
           </figure>
 
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/portfolio/portfolio-obra-prima.webp"
-                srcset="assets/img/portfolio/portfolio-obra-prima.webp 1013w, assets/img/portfolio/portfolio-obra-prima-800w.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 50vw"
-                alt="Stand da Obra Prima Importadora montado pela Conceito na ExpoApras"
-                width="1013"
-                height="1076"
+                src="assets/img/v2/portfolio-diesel-4x4import.webp"
+                srcset="assets/img/v2/portfolio-diesel-4x4import.webp 1600w, assets/img/v2/portfolio-diesel-4x4import-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da Diesel Venom e 4x4 Import montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
                 loading="lazy"
               />
             </div>
-            <figcaption class="portfolio__caption">Obra Prima</figcaption>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Diesel Venom · 4x4 Import</span>
+              <span class="portfolio__fair">Autopar 2026</span>
+            </figcaption>
           </figure>
 
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/portfolio/portfolio-schultz.webp"
-                srcset="assets/img/portfolio/portfolio-schultz.webp 1013w, assets/img/portfolio/portfolio-schultz-800w.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 50vw"
-                alt="Stand da Schultz Max Tech montado pela Conceito em uma feira"
-                width="1013"
-                height="1076"
+                src="assets/img/v2/portfolio-metalring-agel.webp"
+                srcset="assets/img/v2/portfolio-metalring-agel.webp 1600w, assets/img/v2/portfolio-metalring-agel-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da Metalring e AGEL montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
                 loading="lazy"
               />
             </div>
-            <figcaption class="portfolio__caption">Schultz</figcaption>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Metalring · AGEL</span>
+              <span class="portfolio__fair">Autopar 2026</span>
+            </figcaption>
           </figure>
 
-          <figure class="portfolio__item portfolio__item--wide" tabindex="0">
+          <figure class="portfolio__item portfolio__item--tall" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-schultz.webp"
+                srcset="assets/img/v2/portfolio-schultz.webp 1080w, assets/img/v2/portfolio-schultz-sm.webp 600w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da Schultz Max Tech montado pela Conceito em uma feira"
+                width="1080"
+                height="1920"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Schultz Max Tech</span>
+              <span class="portfolio__fair">Autopar 2026</span>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio__item" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-linares.webp"
+                srcset="assets/img/v2/portfolio-linares.webp 1600w, assets/img/v2/portfolio-linares-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande do Grupo Linares montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Grupo Linares</span>
+              <span class="portfolio__fair">Lignum</span>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio__item" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-m2-ferramentas.webp"
+                srcset="assets/img/v2/portfolio-m2-ferramentas.webp 1600w, assets/img/v2/portfolio-m2-ferramentas-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da M2 Ferramentas montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">M2 Ferramentas</span>
+              <span class="portfolio__fair">Lignum</span>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio__item" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-colecao-moda.webp"
+                srcset="assets/img/v2/portfolio-colecao-moda.webp 1600w, assets/img/v2/portfolio-colecao-moda-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da Coleção.Moda montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Coleção.Moda</span>
+              <span class="portfolio__fair">Febratex 2026</span>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio__item" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-automatisa.webp"
+                srcset="assets/img/v2/portfolio-automatisa.webp 1600w, assets/img/v2/portfolio-automatisa-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da Automatisa montado pela Conceito em uma feira"
+                width="1600"
+                height="900"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Automatisa</span>
+              <span class="portfolio__fair">Febratex 2026</span>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio__item" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-sanex.webp"
+                srcset="assets/img/v2/portfolio-sanex.webp 1156w, assets/img/v2/portfolio-sanex-sm.webp 800w"
+                sizes="(min-width: 40rem) 25vw, 85vw"
+                alt="Estande da Sanex montado pela Conceito em uma feira"
+                width="1156"
+                height="1012"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Sanex</span>
+              <span class="portfolio__fair">Expo+ Indústria</span>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
                 src="assets/img/portfolio/portfolio-kerootica.webp"
                 srcset="assets/img/portfolio/portfolio-kerootica.webp 1013w, assets/img/portfolio/portfolio-kerootica-800w.webp 800w"
-                sizes="50vw"
+                sizes="(min-width: 40rem) 25vw, 85vw"
                 alt="Stand da Kerootica montado pela Conceito na ExpoÓptica"
                 width="1013"
                 height="1076"
@@ -399,12 +518,12 @@
             <figcaption class="portfolio__caption">Kerootica</figcaption>
           </figure>
 
-          <figure class="portfolio__item portfolio__item--wide" tabindex="0">
+          <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
                 src="assets/img/portfolio/portfolio-geloni.webp"
                 srcset="assets/img/portfolio/portfolio-geloni.webp 1013w, assets/img/portfolio/portfolio-geloni-800w.webp 800w"
-                sizes="50vw"
+                sizes="(min-width: 40rem) 25vw, 85vw"
                 alt="Stand da Geloni Sorvetes montado pela Conceito na ExpoApras"
                 width="1013"
                 height="1076"
@@ -414,7 +533,7 @@
             <figcaption class="portfolio__caption">Geloni</figcaption>
           </figure>
         </div>
-        <p class="portfolio__counter" aria-live="polite">1 / 8</p>
+        <p class="portfolio__counter" aria-live="polite">1 / 12</p>
         <p class="portfolio__hint">Arraste para ver mais →</p>
       </div>
     </section>

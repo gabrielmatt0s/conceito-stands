@@ -32,7 +32,7 @@
     var headline = document.querySelector(".hero__headline");
     var lede = document.querySelector(".hero__lede");
     var actions = document.querySelectorAll(".hero__actions .btn");
-    var media = document.querySelector(".hero__media img");
+    var media = document.querySelector(".hero__media video");
     var wireframe = document.querySelector(".hero__wireframe");
     if (!headline) return;
 

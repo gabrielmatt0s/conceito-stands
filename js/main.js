@@ -174,6 +174,72 @@
     }
   }
 
+  // Vídeo do hero: toca em loop mudo, com um botão de pausa obrigatório
+  // (WCAG 2.2.2, conteúdo em movimento com mais de 5s) e pausa/retoma sozinho
+  // conforme o hero entra e sai da tela, a menos que o usuário tenha pausado
+  // manualmente. Com movimento reduzido ou dados economizados, só o pôster
+  // aparece: as fontes são removidas pra nem baixar o vídeo.
+  function setupHeroVideo() {
+    var video = document.querySelector(".hero__video");
+    var toggle = document.querySelector(".hero__video-toggle");
+    if (!video) return;
+
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var saveData = !!(navigator.connection && navigator.connection.saveData);
+
+    if (reduceMotion || saveData) {
+      video.removeAttribute("autoplay");
+      video.pause();
+      video.querySelectorAll("source").forEach(function (source) {
+        source.remove();
+      });
+      video.load();
+      if (toggle) toggle.remove();
+      return;
+    }
+
+    var userPaused = false;
+
+    function updateToggle(isPlaying) {
+      if (!toggle) return;
+      toggle.classList.toggle("is-paused", !isPlaying);
+      toggle.setAttribute("aria-label", isPlaying ? "Pausar vídeo" : "Reproduzir vídeo");
+    }
+
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        if (video.paused) {
+          userPaused = false;
+          video.play();
+        } else {
+          userPaused = true;
+          video.pause();
+        }
+      });
+    }
+
+    video.addEventListener("play", function () {
+      updateToggle(true);
+    });
+    video.addEventListener("pause", function () {
+      updateToggle(false);
+    });
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          if (entries[0].isIntersecting) {
+            if (!userPaused) video.play();
+          } else {
+            video.pause();
+          }
+        },
+        { threshold: 0 }
+      );
+      observer.observe(video);
+    }
+  }
+
   // Contador "1 / N" dos carrosséis mobile (Diferenciais e Portfólio), via
   // IntersectionObserver: marca o card mais visível dentro da lista como atual.
   function setupCarouselCounter(listSelector, itemSelector, counterSelector) {
@@ -325,6 +391,7 @@
     setFooterYear();
     setupMobileMenu();
     setupHeaderScroll();
+    setupHeroVideo();
     setupWhatsAppFab();
     setupQuoteForm();
     injectLocalBusinessSchema();
