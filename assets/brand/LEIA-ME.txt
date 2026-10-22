@@ -1,0 +1,22 @@
+KIT DE IDENTIDADE
+Abra brand-guide.html no navegador. Fontes incluídas para uso offline.
+As assinaturas literais são referências solicitadas; use a versão placeholder ou o símbolo antes da decisão do nome.
+Não publicar placeholders. O símbolo é reconstrução geométrica de raster, não vetor original recuperado.
+PNG 1x e 2x: prancheta idêntica, transparência real. SVGs sem texto editável.
+As fotos do guia são referências do PDF e não substituem fotos em alta.
+CSS de componentes e overlays está especificado no guia; tokens.css contém as variáveis.
+
+REVISÃO 21/10/2026
+- Versões monocromáticas (logo, símbolo, pattern, marca d'água) refeitas com vão entre C, F e E. Antes as peças se fundiam.
+- Favicon e ícones de app agora usam o símbolo colorido (fundo branco no favicon, off-white nos ícones).
+- Ícone 03 (Produção e Montagem) trocado por chave inglesa e chave de fenda.
+- og-image.png regenerada com o símbolo corrigido.
+- Fontes em WOFF2 com subset latino (css/fonts/*-latin.woff2). tokens.css já aponta para elas.
+- Novo token --color-primary-hover-on-dark para botões em seções navy.
+- brand-guide.html NÃO foi atualizado: as imagens mono dentro dele ainda são a versão antiga. Os arquivos das pastas são a referência.
+
+REVISÃO 2 (21/10/2026): LOGO OFICIAL
+- A logo oficial é a original: símbolo + "CONCEITO / FEIRAS E EVENTOS" empilhado, texto preto. Texto vetorizado por traçado do arquivo original.
+- Arquivos: logo/svg e logo/png com prefixo logo-vertical-* (oficial) e logo-horizontal-* (mesmos elementos lado a lado, para header).
+- Variações: colorido (fundo claro), branca (fundo escuro ou foto), preta.
+- As assinaturas em Bebas Neue foram movidas para logo/_descartado. Não usar.

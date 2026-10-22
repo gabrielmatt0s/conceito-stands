@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" viewBox="0 0 520 520" role="img" aria-label="Conceito"><defs><clipPath id="outer"><circle cx="500" cy="500" r="500"/></clipPath><clipPath id="inner"><circle cx="500" cy="500" r="320"/></clipPath><clipPath id="ring"><path clip-rule="evenodd" d="M1000 500A500 500 0 1 1 0 500A500 500 0 1 1 1000 500Z M820 500A320 320 0 1 1 180 500A320 320 0 1 1 820 500Z"/></clipPath></defs><g transform="translate(10 10) scale(.5)"><path fill="#036477" fill-rule="evenodd" d="M 888.5729807284854 185.33980447508128 A 500 500 0 1 0 888.5729807284854 814.6601955249187 A 500 500 0 0 0 888.5729807284854 185.33980447508128 Z M 820 500 A 320 320 0 1 1 180 500 A 320 320 0 1 1 820 500 Z"/>
+    <path fill="#002538" d="M888.5729807284854 185.33980447508128A500 500 0 0 1 888.5729807284854 814.6601955249187L748.6867076662306 701.382525135948A320 320 0 0 0 748.6867076662306 298.61747486405204Z"/>
+    <g clip-path="url(#outer)"><path fill="#79BAA6" d="M337 500H537V1000H337Z"/>
+    <g clip-path="url(#inner)"><path fill="#79BAA6" d="M337 0H1000V283H537V396H337Z"/>
+    <path fill="#79BAA6" d="M337 180H537V396H337Z"/></g>
+    <path fill="#002538" d="M537 396H1000V584H537Z"/>
+    <path fill="#30807D" d="M337 396H537V584H337Z"/></g></g></svg>

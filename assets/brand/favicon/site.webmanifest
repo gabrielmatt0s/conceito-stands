@@ -1,0 +1,22 @@
+{
+  "name": "[NOME NO TEXTO]",
+  "short_name": "[NOME NO TEXTO]",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#002538",
+  "background_color": "#F2F5F4",
+  "display": "standalone"
+}

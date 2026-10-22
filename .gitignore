@@ -1,0 +1,16 @@
+# Material comercial privado do cliente, não pertence ao site publicado.
+referencias/
+
+# Duplicata de assets/brand (cópia de trabalho é a versão versionada).
+conceito-identidade/
+
+# Imagens baixadas do site atual, não usadas na landing page.
+assets/img/site/
+
+# Originais em alta resolução das imagens convertidas (backup local, não servido).
+assets/img/originais/
+
+# Arquivos de sistema
+Thumbs.db
+desktop.ini
+.DS_Store

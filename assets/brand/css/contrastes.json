@@ -1,0 +1,82 @@
+{
+  "navy": {
+    "navy": 1.0,
+    "deck": 1.15,
+    "teal": 2.34,
+    "medio": 3.41,
+    "mint": 7.1,
+    "off": 14.48,
+    "texto": 1.07,
+    "branco": 15.89
+  },
+  "deck": {
+    "navy": 1.15,
+    "deck": 1.0,
+    "teal": 2.03,
+    "medio": 2.96,
+    "mint": 6.16,
+    "off": 12.56,
+    "texto": 1.23,
+    "branco": 13.78
+  },
+  "teal": {
+    "navy": 2.34,
+    "deck": 2.03,
+    "teal": 1.0,
+    "medio": 1.46,
+    "mint": 3.03,
+    "off": 6.19,
+    "texto": 2.5,
+    "branco": 6.79
+  },
+  "medio": {
+    "navy": 3.41,
+    "deck": 2.96,
+    "teal": 1.46,
+    "medio": 1.0,
+    "mint": 2.08,
+    "off": 4.25,
+    "texto": 3.64,
+    "branco": 4.66
+  },
+  "mint": {
+    "navy": 7.1,
+    "deck": 6.16,
+    "teal": 3.03,
+    "medio": 2.08,
+    "mint": 1.0,
+    "off": 2.04,
+    "texto": 7.57,
+    "branco": 2.24
+  },
+  "off": {
+    "navy": 14.48,
+    "deck": 12.56,
+    "teal": 6.19,
+    "medio": 4.25,
+    "mint": 2.04,
+    "off": 1.0,
+    "texto": 15.44,
+    "branco": 1.1
+  },
+  "texto": {
+    "navy": 1.07,
+    "deck": 1.23,
+    "teal": 2.5,
+    "medio": 3.64,
+    "mint": 7.57,
+    "off": 15.44,
+    "texto": 1.0,
+    "branco": 16.94
+  },
+  "branco": {
+    "navy": 15.89,
+    "deck": 13.78,
+    "teal": 6.79,
+    "medio": 4.66,
+    "mint": 2.24,
+    "off": 1.1,
+    "texto": 16.94,
+    "branco": 1.0
+  }
+}

@@ -1,0 +1,118 @@
+/* Conceito: fontes locais OFL. WOFF2 com subset latino primeiro, TTF só como fallback. */
+@font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-Regular-latin.woff2') format('woff2'), url('fonts/BebasNeue-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-latin.woff2') format('woff2-variations'), url('fonts/Montserrat-latin.woff2') format('woff2'), url('fonts/Montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+:root {
+  --color-navy: #002538;
+  --color-navy-deck: #00323D;
+  --color-teal: #036477;
+  --color-teal-medium: #30807D;
+  --color-mint: #79BAA6;
+  --color-off-white: #F2F5F4;
+  --color-text: #0B1F27;
+  --color-white: #FFFFFF;
+  --color-bg: var(--color-off-white);
+  --color-surface: var(--color-white);
+  --color-primary: var(--color-teal);
+  --color-primary-hover: var(--color-navy);
+  /* Em seções navy o hover para navy some: use este no fundo escuro. */
+  --color-primary-hover-on-dark: var(--color-teal-medium);
+  --color-accent: var(--color-mint);
+  --color-border: var(--color-teal-medium);
+  --color-focus-light: var(--color-navy);
+  --color-focus-dark: var(--color-mint);
+  --color-text-dark: var(--color-off-white);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --text-h1: 3rem;
+  --weight-h1: 400;
+  --leading-h1: 1.00;
+  --tracking-h1: 0.01em;
+  --text-h2: 2.5rem;
+  --weight-h2: 400;
+  --leading-h2: 1.05;
+  --tracking-h2: 0.01em;
+  --text-h3: 2rem;
+  --weight-h3: 400;
+  --leading-h3: 1.10;
+  --tracking-h3: 0.01em;
+  --text-h4: 1.75rem;
+  --weight-h4: 400;
+  --leading-h4: 1.15;
+  --tracking-h4: 0.01em;
+  --text-h5: 1.5rem;
+  --weight-h5: 400;
+  --leading-h5: 1.15;
+  --tracking-h5: 0.01em;
+  --text-h6: 1.375rem;
+  --weight-h6: 400;
+  --leading-h6: 1.20;
+  --tracking-h6: 0.01em;
+  --text-body: 1rem;
+  --weight-body: 400;
+  --leading-body: 1.65;
+  --tracking-body: 0;
+  --text-lead: 1.125rem;
+  --weight-lead: 500;
+  --leading-lead: 1.55;
+  --tracking-lead: 0;
+  --text-caption: 0.75rem;
+  --weight-caption: 500;
+  --leading-caption: 1.50;
+  --tracking-caption: 0.01em;
+  --text-button: 0.875rem;
+  --weight-button: 600;
+  --leading-button: 1.20;
+  --tracking-button: 0.02em;
+  --text-eyebrow: 0.75rem;
+  --weight-eyebrow: 600;
+  --leading-eyebrow: 1.40;
+  --tracking-eyebrow: 0.12em;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --section-space: 4rem;
+  --page-gutter: 1.25rem;
+  --content-max: 75rem;
+  --radius-none: 0;
+  --radius-sm: .25rem;
+  --radius-card: .5rem;
+  --radius-pill: 999px;
+  /* Sombras derivadas de navy #002538 com transparência. */
+  --shadow-card: 0 8px 24px rgb(0 37 56 / .12);
+  --shadow-header: 0 2px 12px rgb(0 37 56 / .08);
+  --transition-fast: 160ms ease;
+  --transition-base: 240ms ease;
+  --transition-photo: 400ms ease;
+  --control-min: 3rem;
+  --focus-width: 3px;
+  --focus-offset: 3px;
+  --photo-base-opacity: .78;
+  --photo-gallery-saturation: 1;
+}
+@media (min-width: 64rem) {
+  :root {
+    --text-h1: 6rem;
+    --text-h2: 4rem;
+    --text-h3: 2.75rem;
+    --text-h4: 2rem;
+    --text-h5: 1.625rem;
+    --text-h6: 1.375rem;
+    --text-body: 1rem;
+    --text-lead: 1.25rem;
+    --text-caption: 0.75rem;
+    --text-button: 0.875rem;
+    --text-eyebrow: 0.75rem;
+    --section-space: 7.5rem;
+    --page-gutter: 3rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --transition-fast: 0ms; --transition-base: 0ms; --transition-photo: 0ms; }
+}
