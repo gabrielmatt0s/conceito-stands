@@ -112,13 +112,14 @@ textarea:focus-visible {
   outline-offset: var(--focus-offset);
 }
 
-/* Fundo escuro (header não rolado, footer, hero, CTA, botão do WhatsApp): anel mint,
+/* Fundo escuro (header não rolado, hero, CTA, botão do WhatsApp): anel mint,
    visível sobre navy/navy-deck. Corrige o header, que antes só ganhava esse anel
    depois de rolar (--color-focus-light = navy, invisível sobre o hero escuro) e
-   perdia o contraste quando rolado (fundo off-white com anel mint, ratio 2.04). */
+   perdia o contraste quando rolado (fundo off-white com anel mint, ratio 2.04).
+   O rodapé não entra aqui: fundo branco agora, mint não passa contraste (2.24),
+   então usa o anel navy padrão (--color-focus-light) como o resto do fundo claro. */
 .header a:focus-visible,
 .header button:focus-visible,
-.footer a:focus-visible,
 .hero a:focus-visible,
 #contato button:focus-visible,
 #contato input:focus-visible,
@@ -989,8 +990,8 @@ body.nav-open {
 /* ---------- Rodapé ---------- */
 
 .footer {
-  background: var(--color-navy-deck);
-  color: var(--color-off-white);
+  background: var(--color-white);
+  color: var(--color-text);
   padding-block: var(--space-16) var(--space-8);
 }
 
@@ -999,7 +1000,7 @@ body.nav-open {
   grid-template-columns: 1fr;
   gap: var(--space-12);
   padding-bottom: var(--space-12);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-off-white) 16%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
 }
 
 .footer__brand img {
@@ -1013,7 +1014,6 @@ body.nav-open {
   font-weight: 700;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  opacity: 0.7;
   margin-bottom: var(--space-4);
 }
 
@@ -1023,16 +1023,21 @@ body.nav-open {
   gap: var(--space-3);
 }
 
+.footer__list a,
+.footer__contact a {
+  color: var(--color-teal);
+}
+
 .footer__list a:hover,
 .footer__contact a:hover {
-  color: var(--color-mint);
+  color: var(--color-navy);
+  text-decoration: underline;
 }
 
 .footer__contact {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  opacity: 0.9;
 }
 
 .footer__contact[data-contatos] {
@@ -1052,7 +1057,9 @@ body.nav-open {
 .footer__bottom {
   margin-top: var(--space-8);
   font-size: var(--text-caption);
-  opacity: 0.6;
+  /* 0.75 sobre --color-text (branco puro) mede ~7.5:1, com folga acima do piso AA (4.5:1)
+     pedido (conferido contra assets/brand/css/contrastes.json). */
+  opacity: 0.75;
 }
 
 @media (min-width: 40rem) {
