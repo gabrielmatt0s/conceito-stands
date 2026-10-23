@@ -526,14 +526,101 @@ body.nav-open {
   letter-spacing: var(--tracking-h1);
 }
 
+/* Entrada do hero (título, apoio, CTAs) em CSS puro, rodando desde o primeiro
+   quadro, sem depender do GSAP/fontes/SplitText: é o que corrige o LCP, que
+   antes só pintava quando essa cadeia de JS terminava (ver js/animations.js).
+   Duas quebras de linha fixas para o título, uma por breakpoint (igual à quebra
+   que o SplitText produzia antes, conferida em 390px e 1440px): a real/acessível
+   é só o .sr-only, as duas visuais são aria-hidden. */
+.hero__headline-set {
+  display: block;
+}
+
+.hero__headline-set--desktop {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .hero__headline-set--mobile {
+    display: none;
+  }
+
+  .hero__headline-set--desktop {
+    display: block;
+  }
+}
+
+.hero__headline-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero__headline-line-inner {
+  display: block;
+  animation: hero-rise-in 600ms ease-out both;
+}
+
+.hero__headline-set--mobile .hero__headline-line:nth-child(1) .hero__headline-line-inner {
+  animation-delay: 0ms;
+}
+.hero__headline-set--mobile .hero__headline-line:nth-child(2) .hero__headline-line-inner {
+  animation-delay: 80ms;
+}
+.hero__headline-set--mobile .hero__headline-line:nth-child(3) .hero__headline-line-inner {
+  animation-delay: 160ms;
+}
+
+.hero__headline-set--desktop .hero__headline-line:nth-child(1) .hero__headline-line-inner {
+  animation-delay: 0ms;
+}
+.hero__headline-set--desktop .hero__headline-line:nth-child(2) .hero__headline-line-inner {
+  animation-delay: 80ms;
+}
+.hero__headline-set--desktop .hero__headline-line:nth-child(3) .hero__headline-line-inner {
+  animation-delay: 160ms;
+}
+.hero__headline-set--desktop .hero__headline-line:nth-child(4) .hero__headline-line-inner {
+  animation-delay: 240ms;
+}
+
+@keyframes hero-rise-in {
+  from {
+    opacity: 0.01;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mesma animação, mas termina na opacidade de repouso do .hero__lede (0.9, não 1). */
+@keyframes hero-rise-in-dim {
+  from {
+    opacity: 0.01;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
 .hero__lede {
   margin-top: var(--space-6);
   max-width: 28rem;
   color: var(--color-off-white);
-  opacity: 0.9;
   font-size: var(--text-lead);
   font-weight: var(--weight-lead);
   line-height: var(--leading-lead);
+  animation: hero-rise-in-dim 600ms ease-out both;
+  animation-delay: 240ms;
+}
+
+@media (min-width: 64rem) {
+  .hero__lede {
+    animation-delay: 320ms;
+  }
 }
 
 .hero__actions {
@@ -541,6 +628,41 @@ body.nav-open {
   flex-direction: column;
   gap: var(--space-4);
   margin-top: var(--space-8);
+}
+
+.hero__actions .btn {
+  animation: hero-rise-in 600ms ease-out both;
+}
+
+.hero__actions .btn:nth-child(1) {
+  animation-delay: 320ms;
+}
+.hero__actions .btn:nth-child(2) {
+  animation-delay: 400ms;
+}
+
+@media (min-width: 64rem) {
+  .hero__actions .btn:nth-child(1) {
+    animation-delay: 400ms;
+  }
+  .hero__actions .btn:nth-child(2) {
+    animation-delay: 480ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__headline-line-inner,
+  .hero__actions .btn {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__lede {
+    animation: none;
+    opacity: 0.9;
+    transform: none;
+  }
 }
 
 @media (min-width: 30rem) {

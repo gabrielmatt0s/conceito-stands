@@ -26,42 +26,26 @@
     gsap.from(items, tweenVars);
   }
 
-  // ---------- 1. Hero: timeline única de carregamento ----------
+  // ---------- 1. Hero: vídeo e wireframe de fundo ----------
+  // Título, linha de apoio e CTAs NÃO entram aqui: a entrada deles é CSS puro
+  // (ver .hero__headline-line-inner, .hero__lede e .hero__actions .btn em
+  // css/style.css), rodando desde o primeiro quadro sem esperar GSAP/fontes.
+  // Isso corrige o LCP, que antes só pintava quando SplitText terminava.
 
   function initHero() {
-    var headline = document.querySelector(".hero__headline");
-    var lede = document.querySelector(".hero__lede");
-    var actions = document.querySelectorAll(".hero__actions .btn");
     var media = document.querySelector(".hero__media video");
     var wireframe = document.querySelector(".hero__wireframe");
-    if (!headline) return;
+    if (!media && !wireframe) return;
 
-    SplitText.create(headline, {
-      type: "lines",
-      mask: "lines",
-      autoSplit: true,
-      onSplit: function (self) {
-        var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-        tl.from(self.lines, { yPercent: 110, duration: 0.9, stagger: 0.08 }, 0);
-
-        if (lede) {
-          tl.from(lede, { autoAlpha: 0, y: 16, duration: 0.5 }, "-=0.5");
-        }
-        if (actions.length) {
-          tl.from(actions, { autoAlpha: 0, y: 16, duration: 0.5, stagger: 0.08 }, "-=0.35");
-        }
-        if (media) {
-          tl.from(media, { scale: 1.06, duration: 1.4, ease: "power2.out" }, 0);
-        }
-        if (wireframe) {
-          gsap.set(wireframe, { opacity: 0 });
-          tl.to(wireframe, { opacity: 0.6, duration: 1.3, ease: "sine.out" }, 0.1);
-        }
-
-        return tl;
-      },
-    });
+    if (media) {
+      tl.from(media, { scale: 1.06, duration: 1.4, ease: "power2.out" }, 0);
+    }
+    if (wireframe) {
+      gsap.set(wireframe, { opacity: 0 });
+      tl.to(wireframe, { opacity: 0.6, duration: 1.3, ease: "sine.out" }, 0.1);
+    }
   }
 
   // ---------- 3. Títulos de seção (h2): revelação por linha, uma vez ----------
