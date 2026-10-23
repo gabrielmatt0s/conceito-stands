@@ -188,12 +188,9 @@
     var saveData = !!(navigator.connection && navigator.connection.saveData);
 
     if (reduceMotion || saveData) {
-      video.removeAttribute("autoplay");
-      video.pause();
       video.querySelectorAll("source").forEach(function (source) {
         source.remove();
       });
-      video.load();
       if (toggle) toggle.remove();
       return;
     }
@@ -210,7 +207,7 @@
       toggle.addEventListener("click", function () {
         if (video.paused) {
           userPaused = false;
-          video.play();
+          video.play().catch(function () {});
         } else {
           userPaused = true;
           video.pause();
@@ -224,12 +221,16 @@
     video.addEventListener("pause", function () {
       updateToggle(false);
     });
+    video.addEventListener("playing", function () {
+      video.classList.add("is-visible");
+      if (toggle) toggle.classList.add("is-ready");
+    });
 
     if ("IntersectionObserver" in window) {
       var observer = new IntersectionObserver(
         function (entries) {
           if (entries[0].isIntersecting) {
-            if (!userPaused) video.play();
+            if (!userPaused) video.play().catch(function () {});
           } else {
             video.pause();
           }
@@ -237,6 +238,37 @@
         { threshold: 0 }
       );
       observer.observe(video);
+    }
+
+    // Carregamento adiado: o vídeo só compete por banda depois que a página
+    // termina de carregar (CSS, fontes e pôster já resolvidos), escolhendo a
+    // fonte pela mesma regra de densidade usada no pôster.
+    function loadVideo() {
+      var isHighDensityDesktop = window.innerWidth >= 768 && window.devicePixelRatio >= 1.5;
+      Array.prototype.forEach.call(video.querySelectorAll("source"), function (source) {
+        var isHighDensitySource = source.media === "(min-width: 768px) and (min-resolution: 1.5dppx)";
+        if (isHighDensitySource !== isHighDensityDesktop) {
+          source.remove();
+        } else {
+          source.src = source.getAttribute("data-src");
+        }
+      });
+      video.load();
+      video.play().catch(function () {});
+    }
+
+    function scheduleLoadVideo() {
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(loadVideo);
+      } else {
+        setTimeout(loadVideo, 200);
+      }
+    }
+
+    if (document.readyState === "complete") {
+      scheduleLoadVideo();
+    } else {
+      window.addEventListener("load", scheduleLoadVideo);
     }
   }
 

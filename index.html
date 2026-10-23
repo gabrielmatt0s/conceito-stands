@@ -30,14 +30,16 @@
   <link rel="preload" href="assets/brand/css/fonts/BebasNeue-Regular-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/brand/css/fonts/Montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  <!-- Pôster do vídeo do hero, prioridade alta de carregamento. srcset/sizes
-       seguem a largura real do .hero__media: 48vw a partir de 64rem, 100vw antes disso. -->
+  <!-- Pôster do vídeo do hero, prioridade alta de carregamento. imagesizes usa
+       larguras "falsas" (não a largura real do .hero__media) só para fazer o
+       algoritmo nativo de srcset escolher o 1080 apenas em desktop de alta
+       densidade (>= 1.5dppx), igual à regra das fontes do <video>. -->
   <link
     rel="preload"
     as="image"
-    href="assets/video/hero-montagem-poster-1080.webp"
+    href="assets/video/hero-montagem-poster-720.webp"
     imagesrcset="assets/video/hero-montagem-poster-720.webp 720w, assets/video/hero-montagem-poster-1080.webp 1080w"
-    imagesizes="(min-width: 64rem) 48vw, 100vw"
+    imagesizes="(min-width: 48rem) 500px, 180px"
     fetchpriority="high"
   />
 
@@ -94,35 +96,38 @@
   <main id="conteudo-principal">
     <section class="hero" id="hero" aria-labelledby="hero-heading">
       <div class="hero__media">
+        <!-- Sem src aqui de propósito: o script abaixo escolhe a largura certa
+             (720 ou 1080) antes do primeiro paint. Um src fixo aqui faria o
+             navegador baixar essa versão e depois a correta, duas vezes. -->
+        <img class="hero__poster" alt="" width="720" height="1280" aria-hidden="true" fetchpriority="high" />
         <video
           class="hero__video"
-          autoplay
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           poster="assets/video/hero-montagem-poster-720.webp"
           aria-hidden="true"
         >
-          <source src="assets/video/hero-montagem-1080.webm" type="video/webm" media="(min-width: 768px)" />
-          <source src="assets/video/hero-montagem-1080.mp4" type="video/mp4" media="(min-width: 768px)" />
-          <source src="assets/video/hero-montagem-720.webm" type="video/webm" />
-          <source src="assets/video/hero-montagem-720.mp4" type="video/mp4" />
+          <source data-src="assets/video/hero-montagem-1080.webm" type="video/webm" media="(min-width: 768px) and (min-resolution: 1.5dppx)" />
+          <source data-src="assets/video/hero-montagem-1080.mp4" type="video/mp4" media="(min-width: 768px) and (min-resolution: 1.5dppx)" />
+          <source data-src="assets/video/hero-montagem-720.mp4" type="video/mp4" />
+          <source data-src="assets/video/hero-montagem-720.webm" type="video/webm" />
         </video>
         <script>
           (function () {
-            // Fallback para navegadores que ignoram o atributo media em <source>:
-            // escolhe a fonte pela largura da tela antes de chamar load().
-            var video = document.currentScript.previousElementSibling;
-            var isDesktop = window.innerWidth >= 768;
-            video.poster = isDesktop
+            // Escolhe o pôster certo imediatamente (mesma regra de densidade das
+            // fontes do <video>, ver setupHeroVideo em main.js, que roda depois do
+            // window "load" e copia data-src -> src antes de dar play()).
+            var container = document.currentScript.closest(".hero__media");
+            var poster = container.querySelector(".hero__poster");
+            var video = container.querySelector(".hero__video");
+            var isHighDensityDesktop = window.innerWidth >= 768 && window.devicePixelRatio >= 1.5;
+            var posterSrc = isHighDensityDesktop
               ? "assets/video/hero-montagem-poster-1080.webp"
               : "assets/video/hero-montagem-poster-720.webp";
-            Array.prototype.forEach.call(video.querySelectorAll("source"), function (source) {
-              var isDesktopSource = source.media === "(min-width: 768px)";
-              if (isDesktopSource !== isDesktop) source.remove();
-            });
-            video.load();
+            poster.src = posterSrc;
+            video.poster = posterSrc;
           })();
         </script>
         <button class="hero__video-toggle" type="button" aria-label="Pausar vídeo">
