@@ -30,11 +30,14 @@
   <link rel="preload" href="assets/brand/css/fonts/BebasNeue-Regular-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/brand/css/fonts/Montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  <!-- Pôster do vídeo do hero, prioridade alta de carregamento -->
+  <!-- Pôster do vídeo do hero, prioridade alta de carregamento. srcset/sizes
+       seguem a largura real do .hero__media: 48vw a partir de 64rem, 100vw antes disso. -->
   <link
     rel="preload"
-    href="assets/video/hero-montagem-poster.webp"
     as="image"
+    href="assets/video/hero-montagem-poster-1080.webp"
+    imagesrcset="assets/video/hero-montagem-poster-720.webp 720w, assets/video/hero-montagem-poster-1080.webp 1080w"
+    imagesizes="(min-width: 64rem) 48vw, 100vw"
     fetchpriority="high"
   />
 
@@ -98,12 +101,30 @@
           loop
           playsinline
           preload="metadata"
-          poster="assets/video/hero-montagem-poster.webp"
+          poster="assets/video/hero-montagem-poster-720.webp"
           aria-hidden="true"
         >
-          <source src="assets/video/hero-montagem.webm" type="video/webm" />
-          <source src="assets/video/hero-montagem.mp4" type="video/mp4" />
+          <source src="assets/video/hero-montagem-1080.webm" type="video/webm" media="(min-width: 768px)" />
+          <source src="assets/video/hero-montagem-1080.mp4" type="video/mp4" media="(min-width: 768px)" />
+          <source src="assets/video/hero-montagem-720.webm" type="video/webm" />
+          <source src="assets/video/hero-montagem-720.mp4" type="video/mp4" />
         </video>
+        <script>
+          (function () {
+            // Fallback para navegadores que ignoram o atributo media em <source>:
+            // escolhe a fonte pela largura da tela antes de chamar load().
+            var video = document.currentScript.previousElementSibling;
+            var isDesktop = window.innerWidth >= 768;
+            video.poster = isDesktop
+              ? "assets/video/hero-montagem-poster-1080.webp"
+              : "assets/video/hero-montagem-poster-720.webp";
+            Array.prototype.forEach.call(video.querySelectorAll("source"), function (source) {
+              var isDesktopSource = source.media === "(min-width: 768px)";
+              if (isDesktopSource !== isDesktop) source.remove();
+            });
+            video.load();
+          })();
+        </script>
         <button class="hero__video-toggle" type="button" aria-label="Pausar vídeo">
           <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <rect x="6" y="5" width="4" height="14" rx="1" />
@@ -227,13 +248,14 @@
           <article class="diferencial" tabindex="0">
             <div class="diferencial__media">
               <img
-                src="assets/img/v2/diferencial-grafica-acabamento.webp"
-                srcset="assets/img/v2/diferencial-grafica-acabamento.webp 1080w, assets/img/v2/diferencial-grafica-acabamento-sm.webp 600w"
-                sizes="(min-width: 56rem) 46vw, 100vw"
+                src="assets/img/v2/diferencial-grafica-acabamento-1800w.webp"
+                srcset="assets/img/v2/diferencial-grafica-acabamento-480w.webp 480w, assets/img/v2/diferencial-grafica-acabamento-768w.webp 768w, assets/img/v2/diferencial-grafica-acabamento-1200w.webp 1200w, assets/img/v2/diferencial-grafica-acabamento-1800w.webp 1800w"
+                sizes="(min-width: 56rem) min(42vw, 508px), (min-width: 48rem) 93vw, 82vw"
                 alt="Equipe da Conceito instalando o acabamento final de um stand"
-                width="1080"
-                height="1920"
+                width="1800"
+                height="3200"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="diferencial__text">
@@ -245,13 +267,14 @@
           <article class="diferencial" tabindex="0">
             <div class="diferencial__media">
               <img
-                src="assets/img/v2/diferencial-estruturas.webp"
-                srcset="assets/img/v2/diferencial-estruturas.webp 1600w, assets/img/v2/diferencial-estruturas-sm.webp 800w"
-                sizes="(min-width: 56rem) 46vw, 100vw"
+                src="assets/img/v2/diferencial-estruturas-2400w.webp"
+                srcset="assets/img/v2/diferencial-estruturas-640w.webp 640w, assets/img/v2/diferencial-estruturas-1024w.webp 1024w, assets/img/v2/diferencial-estruturas-1600w.webp 1600w, assets/img/v2/diferencial-estruturas-2400w.webp 2400w"
+                sizes="(min-width: 56rem) min(42vw, 508px), (min-width: 48rem) 93vw, 82vw"
                 alt="Portal de LED estruturado pela Conceito em um estande de feira"
-                width="1600"
-                height="900"
+                width="2400"
+                height="1350"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="diferencial__text">
@@ -263,13 +286,14 @@
           <article class="diferencial" tabindex="0">
             <div class="diferencial__media diferencial__media--top">
               <img
-                src="assets/img/v2/diferencial-equipe.webp"
-                srcset="assets/img/v2/diferencial-equipe.webp 1080w, assets/img/v2/diferencial-equipe-sm.webp 600w"
-                sizes="(min-width: 56rem) 46vw, 100vw"
+                src="assets/img/v2/diferencial-equipe-1800w.webp"
+                srcset="assets/img/v2/diferencial-equipe-480w.webp 480w, assets/img/v2/diferencial-equipe-768w.webp 768w, assets/img/v2/diferencial-equipe-1200w.webp 1200w, assets/img/v2/diferencial-equipe-1800w.webp 1800w"
+                sizes="(min-width: 56rem) min(42vw, 508px), (min-width: 48rem) 93vw, 82vw"
                 alt="Montador da Conceito com camiseta da marca em um estande de feira"
-                width="1080"
-                height="1440"
+                width="1800"
+                height="2400"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="diferencial__text">
@@ -326,13 +350,14 @@
           <figure class="portfolio__item portfolio__item--feature" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-formlabs-3dcriar.webp"
-                srcset="assets/img/v2/portfolio-formlabs-3dcriar.webp 1600w, assets/img/v2/portfolio-formlabs-3dcriar-sm.webp 800w"
-                sizes="(min-width: 40rem) 50vw, 85vw"
+                src="assets/img/v2/portfolio-formlabs-3dcriar-2400w.webp"
+                srcset="assets/img/v2/portfolio-formlabs-3dcriar-640w.webp 640w, assets/img/v2/portfolio-formlabs-3dcriar-1024w.webp 1024w, assets/img/v2/portfolio-formlabs-3dcriar-1600w.webp 1600w, assets/img/v2/portfolio-formlabs-3dcriar-2400w.webp 2400w"
+                sizes="(min-width: 48rem) min(44vw, 33rem), 85vw"
                 alt="Estande da 3D Criar e Formlabs montado pela Conceito em uma feira"
-                width="1600"
-                height="900"
+                width="2400"
+                height="1350"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -344,13 +369,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-kx3.webp"
-                srcset="assets/img/v2/portfolio-kx3.webp 1600w, assets/img/v2/portfolio-kx3-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-kx3-2400w.webp"
+                srcset="assets/img/v2/portfolio-kx3-640w.webp 640w, assets/img/v2/portfolio-kx3-1024w.webp 1024w, assets/img/v2/portfolio-kx3-1600w.webp 1600w, assets/img/v2/portfolio-kx3-2400w.webp 2400w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da KX3 Acessórios Automotivos montado pela Conceito em uma feira"
-                width="1600"
-                height="900"
+                width="2400"
+                height="1350"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -362,13 +388,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-diesel-4x4import.webp"
-                srcset="assets/img/v2/portfolio-diesel-4x4import.webp 1600w, assets/img/v2/portfolio-diesel-4x4import-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-diesel-4x4import-2400w.webp"
+                srcset="assets/img/v2/portfolio-diesel-4x4import-640w.webp 640w, assets/img/v2/portfolio-diesel-4x4import-1024w.webp 1024w, assets/img/v2/portfolio-diesel-4x4import-1600w.webp 1600w, assets/img/v2/portfolio-diesel-4x4import-2400w.webp 2400w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da Diesel Venom e 4x4 Import montado pela Conceito em uma feira"
-                width="1600"
-                height="900"
+                width="2400"
+                height="1350"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -380,13 +407,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-metalring-agel.webp"
-                srcset="assets/img/v2/portfolio-metalring-agel.webp 1600w, assets/img/v2/portfolio-metalring-agel-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-metalring-agel-2400w.webp"
+                srcset="assets/img/v2/portfolio-metalring-agel-640w.webp 640w, assets/img/v2/portfolio-metalring-agel-1024w.webp 1024w, assets/img/v2/portfolio-metalring-agel-1600w.webp 1600w, assets/img/v2/portfolio-metalring-agel-2400w.webp 2400w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da Metalring e AGEL montado pela Conceito em uma feira"
-                width="1600"
-                height="900"
+                width="2400"
+                height="1350"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -398,13 +426,14 @@
           <figure class="portfolio__item portfolio__item--tall" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-schultz.webp"
-                srcset="assets/img/v2/portfolio-schultz.webp 1080w, assets/img/v2/portfolio-schultz-sm.webp 600w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-schultz-1800w.webp"
+                srcset="assets/img/v2/portfolio-schultz-480w.webp 480w, assets/img/v2/portfolio-schultz-768w.webp 768w, assets/img/v2/portfolio-schultz-1200w.webp 1200w, assets/img/v2/portfolio-schultz-1800w.webp 1800w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da Schultz Max Tech montado pela Conceito em uma feira"
-                width="1080"
-                height="1920"
+                width="1800"
+                height="3200"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -416,13 +445,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-linares.webp"
-                srcset="assets/img/v2/portfolio-linares.webp 1600w, assets/img/v2/portfolio-linares-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-linares-2400w.webp"
+                srcset="assets/img/v2/portfolio-linares-640w.webp 640w, assets/img/v2/portfolio-linares-1024w.webp 1024w, assets/img/v2/portfolio-linares-1600w.webp 1600w, assets/img/v2/portfolio-linares-2400w.webp 2400w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande do Grupo Linares montado pela Conceito em uma feira"
-                width="1600"
-                height="900"
+                width="2400"
+                height="1350"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -434,13 +464,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-m2-ferramentas.webp"
-                srcset="assets/img/v2/portfolio-m2-ferramentas.webp 1600w, assets/img/v2/portfolio-m2-ferramentas-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-m2-ferramentas-2400w.webp"
+                srcset="assets/img/v2/portfolio-m2-ferramentas-640w.webp 640w, assets/img/v2/portfolio-m2-ferramentas-1024w.webp 1024w, assets/img/v2/portfolio-m2-ferramentas-1600w.webp 1600w, assets/img/v2/portfolio-m2-ferramentas-2400w.webp 2400w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da M2 Ferramentas montado pela Conceito em uma feira"
-                width="1600"
-                height="900"
+                width="2400"
+                height="1350"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -452,13 +483,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-colecao-moda.webp"
-                srcset="assets/img/v2/portfolio-colecao-moda.webp 1600w, assets/img/v2/portfolio-colecao-moda-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-colecao-moda-1600w.webp"
+                srcset="assets/img/v2/portfolio-colecao-moda-640w.webp 640w, assets/img/v2/portfolio-colecao-moda-1024w.webp 1024w, assets/img/v2/portfolio-colecao-moda-1600w.webp 1600w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da Coleção.Moda montado pela Conceito em uma feira"
                 width="1600"
                 height="900"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -470,13 +502,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-automatisa.webp"
-                srcset="assets/img/v2/portfolio-automatisa.webp 1600w, assets/img/v2/portfolio-automatisa-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-automatisa-1600w.webp"
+                srcset="assets/img/v2/portfolio-automatisa-640w.webp 640w, assets/img/v2/portfolio-automatisa-1024w.webp 1024w, assets/img/v2/portfolio-automatisa-1600w.webp 1600w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da Automatisa montado pela Conceito em uma feira"
                 width="1600"
                 height="900"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -488,13 +521,14 @@
           <figure class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-sanex.webp"
-                srcset="assets/img/v2/portfolio-sanex.webp 1156w, assets/img/v2/portfolio-sanex-sm.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                src="assets/img/v2/portfolio-sanex-1156w.webp"
+                srcset="assets/img/v2/portfolio-sanex-640w.webp 640w, assets/img/v2/portfolio-sanex-1024w.webp 1024w, assets/img/v2/portfolio-sanex-1156w.webp 1156w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Estande da Sanex montado pela Conceito em uma feira"
                 width="1156"
                 height="1012"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
@@ -508,11 +542,12 @@
               <img
                 src="assets/img/portfolio/portfolio-kerootica.webp"
                 srcset="assets/img/portfolio/portfolio-kerootica.webp 1013w, assets/img/portfolio/portfolio-kerootica-800w.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Stand da Kerootica montado pela Conceito na ExpoÓptica"
                 width="1013"
                 height="1076"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">Kerootica</figcaption>
@@ -523,11 +558,12 @@
               <img
                 src="assets/img/portfolio/portfolio-geloni.webp"
                 srcset="assets/img/portfolio/portfolio-geloni.webp 1013w, assets/img/portfolio/portfolio-geloni-800w.webp 800w"
-                sizes="(min-width: 40rem) 25vw, 85vw"
+                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
                 alt="Stand da Geloni Sorvetes montado pela Conceito na ExpoApras"
                 width="1013"
                 height="1076"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">Geloni</figcaption>

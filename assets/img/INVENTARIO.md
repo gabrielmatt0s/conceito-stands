@@ -24,27 +24,30 @@ Critério de uso: **hero** exige largura mínima 1600px; **card** exige mínima 
 
 > **Atualização:** as linhas `producao-marcenaria-corte-p02`, `producao-equipe-tablet-p02`, `producao-montagem-parafusadeira-p02`, `stand-perego-correct-feira-p03`, `stand-perego-correct-feira-alt-p05`, `stand-kx3-p05`, `stand-metalring-agel-p05`, `stand-almata-quimica-feicon2026-p05` e `stand-obra-prima-expoapras2026-p05` abaixo descrevem material já **substituído e removido do repositório**: o cliente enviou o banco de mídia original (Drive "Banco de imagens"), ver seção `assets/img/v2/` e `assets/video/` logo abaixo. `stand-schultz-maxtech-p05`, `stand-kerootica-expooptica2026-p05` e `stand-geloni-expoapras2026-p05` seguem válidas: Schultz foi substituída (ver nova seção), Kerootica e Geloni continuam em uso (`assets/img/portfolio/`).
 
-## `assets/img/v2/` e `assets/video/`: banco de mídia original do cliente (Drive "Banco de imagens")
+## `assets/img/v2/` e `assets/video/`: mídia em alta definição, gerada a partir dos originais em `bruto/`
 
-Mídias já processadas e otimizadas pelo cliente (WebP qualidade equivalente, variante `-sm` menor para cada foto; vídeo em H.264 e VP9). Não reprocessar.
+`bruto/` guarda o material bruto do cliente (fotos de até 4032px, vídeos 4K em HEVC/HDR) e **não é versionado nem referenciado pelo site**. Cada arquivo abaixo foi gerado a partir de um original específico de `bruto/` (ver coluna "Original"), com `exif_transpose` para respeitar a rotação do celular, em WebP qualidade 82 / method 6, sem metadados EXIF, em larguras responsivas (horizontais: 640/1024/1600/2400px; verticais: 480/768/1200/1800px; só as larguras que o original comporta, nunca upscale). O vídeo do hero foi recortado dos originais 4K (tonemap HDR→SDR, HLG/BT.2020→BT.709) e recodificado em WebM (VP9) e MP4 (H.264) em duas resoluções.
 
-| Arquivo | Resolução | O que mostra | Uso |
-|---|---|---|---|
-| `video/hero-montagem.mp4`, `video/hero-montagem.webm` | 720x1280 (vertical), 12,9s, sem áudio | Montagem de um stand, em vídeo | **hero**, fundo do vídeo (substitui a foto estática do Perego) |
-| `video/hero-montagem-poster.webp` | 720x1280 | Último quadro do vídeo acima (stand de hexágonos) | **hero**, pôster/fallback do vídeo |
-| `img/v2/diferencial-grafica-acabamento.webp` (+ `-sm`) | 1080x1920 | Equipe instalando acabamento de um stand | **card**, seção "Gráfica interna" |
-| `img/v2/diferencial-estruturas.webp` (+ `-sm`) | 1600x900 | Portal de LED de um estande | **card**, seção "Estruturas modernas" |
-| `img/v2/diferencial-equipe.webp` (+ `-sm`) | 1080x1440 | Montador com camiseta da Conceito | **card**, seção "Equipe dedicada" |
-| `img/v2/portfolio-formlabs-3dcriar.webp` (+ `-sm`) | 1600x900 | Estande 3D Criar / Formlabs, Expo+ Indústria | **card**, galeria de portfólio, célula de destaque |
-| `img/v2/portfolio-kx3.webp` (+ `-sm`) | 1600x900 | Estande KX3 Acessórios Automotivos, Autopar 2026 | **card**, galeria de portfólio |
-| `img/v2/portfolio-diesel-4x4import.webp` (+ `-sm`) | 1600x900 | Estande Diesel Venom / 4x4 Import, Autopar 2026 | **card**, galeria de portfólio |
-| `img/v2/portfolio-metalring-agel.webp` (+ `-sm`) | 1600x900 | Estande Metalring / AGEL, Autopar 2026 | **card**, galeria de portfólio |
-| `img/v2/portfolio-schultz.webp` (+ `-sm`) | 1080x1920 | Estande Schultz Max Tech, Autopar 2026 (foto vertical) | **card**, galeria de portfólio |
-| `img/v2/portfolio-linares.webp` (+ `-sm`) | 1600x900 | Estande Grupo Linares, Lignum | **card**, galeria de portfólio |
-| `img/v2/portfolio-m2-ferramentas.webp` (+ `-sm`) | 1600x900 | Estande M2 Ferramentas, Lignum | **card**, galeria de portfólio |
-| `img/v2/portfolio-colecao-moda.webp` (+ `-sm`) | 1600x900 | Estande Coleção.Moda, Febratex 2026 | **card**, galeria de portfólio |
-| `img/v2/portfolio-automatisa.webp` (+ `-sm`) | 1600x900 | Estande Automatisa, Febratex 2026 | **card**, galeria de portfólio |
-| `img/v2/portfolio-sanex.webp` (+ `-sm`) | 1156x1012 | Estande Sanex, Expo+ Indústria | **card**, galeria de portfólio |
+| Arquivo | Original em `bruto/` | Larguras geradas (peso) | O que mostra | Uso |
+|---|---|---|---|---|
+| `video/hero-montagem-1080.webm` (crf 38) / `.mp4` (crf 28) | 6 clipes de `autopar-videos/` e `expo-industria/` (ver `CLAUDE.md`/histórico para os cortes exatos) | 1080x1920, 12,9s, sem áudio (webm 4085,2 KB / mp4 3592,2 KB) | Montagem de um stand, em vídeo | **hero**, fundo do vídeo em telas ≥768px |
+| `video/hero-montagem-720.webm` (crf 38) / `.mp4` (crf 26) | idem, recodificado em menor resolução | 720x1280, 12,9s, sem áudio (webm 2371,6 KB / mp4 2354,6 KB) | idem | **hero**, fundo do vídeo em telas <768px |
+| `video/hero-montagem-poster-1080.webp` / `-poster-720.webp` | último quadro dos vídeos acima | 1080x1920 (108,0 KB) / 720x1280 (68,8 KB) | Último quadro do vídeo (stand de hexágonos, 3D Criar/Formlabs) | **hero**, pôster/fallback do vídeo, selecionado via `imagesrcset`/`imagesizes` |
+| `img/v2/diferencial-grafica-acabamento-{480,768,1200,1800}w.webp` | `autopar-fotos/IMG_6846.HEIC` | 480w (29,3 KB) · 768w (56,4 KB) · 1200w (104,6 KB) · 1800w (183,7 KB) | Equipe instalando acabamento de um stand | **card**, seção "Gráfica interna" |
+| `img/v2/diferencial-estruturas-{640,1024,1600,2400}w.webp` | `autopar-fotos/IMG_6776.HEIC` | 640w (40,6 KB) · 1024w (87,4 KB) · 1600w (174,7 KB) · 2400w (342,3 KB) | Portal de LED de um estande | **card**, seção "Estruturas modernas" |
+| `img/v2/diferencial-equipe-{480,768,1200,1800}w.webp` | `autopar-fotos/IMG_6643.HEIC` | 480w (41,0 KB) · 768w (82,0 KB) · 1200w (151,7 KB) · 1800w (256,3 KB) | Montador com camiseta da Conceito | **card**, seção "Equipe dedicada" |
+| `img/v2/portfolio-formlabs-3dcriar-{640,1024,1600,2400}w.webp` | `expo-industria/Expo+ Industria/IMG_1975.jpeg` | 640w (46,2 KB) · 1024w (96,7 KB) · 1600w (200,2 KB) · 2400w (400,0 KB) | Estande 3D Criar / Formlabs, Expo+ Indústria | **card**, galeria de portfólio, célula de destaque |
+| `img/v2/portfolio-kx3-{640,1024,1600,2400}w.webp` | `autopar-fotos/IMG_6822.HEIC` | 640w (41,0 KB) · 1024w (84,8 KB) · 1600w (166,9 KB) · 2400w (309,5 KB) | Estande KX3 Acessórios Automotivos, Autopar 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-diesel-4x4import-{640,1024,1600,2400}w.webp` | `autopar-fotos/IMG_6833.HEIC` | 640w (40,7 KB) · 1024w (93,7 KB) · 1600w (200,1 KB) · 2400w (395,3 KB) | Estande Diesel Venom / 4x4 Import, Autopar 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-metalring-agel-{640,1024,1600,2400}w.webp` | `autopar-fotos/IMG_6799.HEIC` | 640w (38,5 KB) · 1024w (78,7 KB) · 1600w (153,2 KB) · 2400w (267,6 KB) | Estande Metalring / AGEL, Autopar 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-schultz-{480,768,1200,1800}w.webp` | `autopar-fotos/IMG_6785.HEIC` | 480w (45,9 KB) · 768w (93,2 KB) · 1200w (177,9 KB) · 1800w (317,1 KB) | Estande Schultz Max Tech, Autopar 2026 (foto vertical) | **card**, galeria de portfólio, célula vertical de 2 linhas |
+| `img/v2/portfolio-linares-{640,1024,1600,2400}w.webp` | `lignum-fotos/IMG_3003.jpeg` | 640w (48,6 KB) · 1024w (114,3 KB) · 1600w (254,7 KB) · 2400w (509,5 KB) | Estande Grupo Linares, Lignum | **card**, galeria de portfólio |
+| `img/v2/portfolio-m2-ferramentas-{640,1024,1600,2400}w.webp` | `lignum-fotos/IMG_2979.jpeg` | 640w (31,7 KB) · 1024w (71,2 KB) · 1600w (164,5 KB) · 2400w (332,2 KB) | Estande M2 Ferramentas, Lignum | **card**, galeria de portfólio |
+| `img/v2/portfolio-colecao-moda-{640,1024,1600}w.webp` | `febratex/WhatsApp Image 2026-08-17 at 18.53.43.jpeg` (original só tem 1600px) | 640w (34,0 KB) · 1024w (63,9 KB) · 1600w (112,1 KB) | Estande Coleção.Moda, Febratex 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-automatisa-{640,1024,1600}w.webp` | `febratex/WhatsApp Image 2026-08-17 at 18.54.43 (2).jpeg` (original só tem 1600px) | 640w (33,2 KB) · 1024w (62,5 KB) · 1600w (110,3 KB) | Estande Automatisa, Febratex 2026 | **card**, galeria de portfólio |
+| `img/v2/portfolio-sanex-{640,1024,1156}w.webp` | `expo-industria/stand-verde-captura.png` (original só tem 1156px, maior versão = largura original) | 640w (53,0 KB) · 1024w (105,6 KB) · 1156w (128,8 KB) | Estande Sanex, Expo+ Indústria | **card**, galeria de portfólio |
+
+Kerootica (`img/portfolio/portfolio-kerootica.webp`) e Geloni (`img/portfolio/portfolio-geloni.webp`) não têm original em alta resolução em `bruto/`: continuam nas versões extraídas do PDF (ver tabela acima), sem srcset responsivo. Dependem de foto nova do cliente.
 
 ## `assets/img/site/`: baixadas de `conceitostands.com.br` (site atual)
 
