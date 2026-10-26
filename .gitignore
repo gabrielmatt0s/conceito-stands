@@ -17,3 +17,6 @@ desktop.ini
 
 # Banco de mídia bruto do cliente (pesado, não versionar)
 bruto/
+
+.vercel
+.env*
