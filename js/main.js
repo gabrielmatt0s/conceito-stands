@@ -274,7 +274,7 @@
 
   // Contador "1 / N" dos carrosséis mobile (Diferenciais e Portfólio), via
   // IntersectionObserver: marca o card mais visível dentro da lista como atual.
-  function setupCarouselCounter(listSelector, itemSelector, counterSelector) {
+  function setupCarouselCounter(listSelector, itemSelector, counterSelector, pad) {
     var list = document.querySelector(listSelector);
     var counter = document.querySelector(counterSelector);
     if (!list || !counter || !("IntersectionObserver" in window)) return;
@@ -283,8 +283,12 @@
     if (!items.length) return;
     var total = items.length;
 
+    function pad2(n) {
+      return pad && n < 10 ? "0" + n : String(n);
+    }
+
     function updateCounter(index) {
-      counter.textContent = index + 1 + " / " + total;
+      counter.textContent = pad2(index + 1) + " / " + pad2(total);
     }
 
     var observer = new IntersectionObserver(
@@ -428,7 +432,7 @@
     setupQuoteForm();
     injectLocalBusinessSchema();
     setupCarouselCounter(".diferenciais__list", ".diferencial", ".diferenciais__counter");
-    setupCarouselCounter(".portfolio__grid", ".portfolio__item", ".portfolio__counter");
+    setupCarouselCounter(".portfolio__grid", ".portfolio__item", ".portfolio__counter", true);
     setupSwipeHint(".portfolio__grid", ".portfolio__hint");
   });
 })();

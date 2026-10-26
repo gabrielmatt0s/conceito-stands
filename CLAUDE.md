@@ -87,7 +87,8 @@ Extraído do site atual, da apresentação comercial e da logo. Não inventar na
   4. Entrega Pronta: você só precisa chegar e aproveitar o evento.
 - **Missão**: cuidamos de cada detalhe do projeto, da produção e da montagem para que você foque no que realmente importa: conquistar e encantar seus clientes.
 - **CTA final**: "Pronto para se destacar?" + "Nossa equipe cuida de tudo, do projeto à desmontagem."
-- **Clientes atendidos**: Perego / Lentes Correct, Almata Química, Kerootica, Obra Prima, KX3, Metalring / AGEL, Geloni, Schultz.
+- **Clientes atendidos**: Perego / Lentes Correct, Almata Química, Kerootica, Obra Prima, KX3, Metalring / AGEL, Geloni, Schultz, Cofemo, Fergraf, Guabifios, Squadroni, Upton.
+- **Portfólio (galeria de fotos)**: 8 stands, trocados em 2026: Upton (Fispal Tec 2026, célula de destaque), Fergraf (Formóbile 2026, foto vertical), Perego Lentes (Expoótica 2026, foto vertical), Cofemo (Formóbile 2026), Guabifios (Febratex 2026), Squadroni (Formóbile 2026), Almata Química (Formóbile 2026), Obra Prima (ProWine 2026).
 - **Nome no texto**: Conceito Stands. A logo continua "Conceito Feiras e Eventos" (marca gráfica, não muda).
 - **Tempo de mercado**: mais de 10 anos.
 - **Contatos**: Lucas Jactchak (41) 99697-4677, destino dos orçamentos; Marco Orasmo (41) 99666-6865, marco@conceitostands.com.br.
@@ -96,9 +97,7 @@ Extraído do site atual, da apresentação comercial e da logo. Não inventar na
 
 ## Pendências: NÃO decidir, usar placeholder
 
-O cliente já fechou todas as pendências de conteúdo (nomes, contatos, tempo de mercado, Instagram e localização: ver Conteúdo aprovado acima). Resta apenas esta:
-
-- **Mídia original do cliente integrada** (Drive "Banco de imagens"). Fotos antigas restantes: Kerootica e Geloni (resolução de PDF).
+O cliente já fechou todas as pendências de conteúdo (nomes, contatos, tempo de mercado, Instagram e localização: ver Conteúdo aprovado acima) e de mídia (a última pendência, as fotos antigas de Kerootica e Geloni em resolução de PDF, foi resolvida com a troca do portfólio pelo lote 2026). Nenhuma pendência em aberto no momento.
 
 ## Regras do projeto
 
@@ -122,7 +121,6 @@ assets/
   img/
     pdf/        imagens extraídas de referencias/apresentacao-comercial-conceito.pdf
     site/       imagens baixadas do site atual (banners, serviços, logos de clientes, fotos de Instagram)
-    portfolio/  recortes das fotos com legenda impressa, usados na galeria (originais em img/pdf intactos)
     hero/       render wireframe convertido em traço claro, usado como textura no hero (original em img/pdf intacto)
     INVENTARIO.md   tabela de todas as imagens: origem, resolução, conteúdo, uso recomendado
 ```
