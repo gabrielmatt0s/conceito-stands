@@ -865,6 +865,13 @@ body.nav-open {
   object-position: center 25%;
 }
 
+/* A faixa "Guabifios" do stand fica perto da borda direita da foto: com o
+   zoom(1.15) do parallax em desktop (ver initDiferenciais em animations.js),
+   o corte central cortava o final do texto. Desloca o corte para a direita. */
+.diferencial__media--right img {
+  object-position: 100% center;
+}
+
 .diferencial__media::after {
   content: "";
   position: absolute;

@@ -78,7 +78,7 @@ Extraído do site atual, da apresentação comercial e da logo. Não inventar na
   - Cenografia: "Desde shows a feiras comerciais, a estrutura que seu evento precisa."
 - **Diferenciais**:
   - Gráfica interna: controle total sobre materiais, cores e acabamento para garantir a identidade da marca do cliente.
-  - Estruturas modernas: projetos impactantes que aumentam engajamento e destacam a empresa.
+  - Estruturas modernas: projetos impactantes que aumentam engajamento e destacam a empresa. Foto: estande da Guabifios (Febratex 2026), a mesma da galeria de portfólio.
   - Equipe dedicada: do início ao fim do projeto, com pontualidade e confiabilidade.
 - **Processo** (4 etapas, ícones em `graficos/0X-*.svg`):
   1. Briefing: entendemos seus objetivos de participação na feira.
