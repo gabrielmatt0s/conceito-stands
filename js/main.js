@@ -62,6 +62,12 @@
       var nome = document.createElement("p");
       nome.className = "footer__contact-nome";
       nome.textContent = contato.nome;
+      if (contato.cargo) {
+        var cargo = document.createElement("span");
+        cargo.className = "footer__contact-cargo";
+        cargo.textContent = " · " + contato.cargo;
+        nome.appendChild(cargo);
+      }
       entry.appendChild(nome);
 
       var telefoneLink = document.createElement("a");
@@ -387,6 +393,7 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       name: CFG.NOME_NO_TEXTO,
+      description: "Há mais de 30 anos projetando, fabricando e montando stands personalizados para feiras e eventos. Stands, quiosques comerciais e cenografia em Curitiba e região.",
       image: "assets/brand/social/og-image.png",
       telephone: "+55 41 99697-4677",
       email: "marco@conceitostands.com.br",

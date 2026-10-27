@@ -67,31 +67,33 @@ Usar como direção de **ritmo e composição**, nunca copiar literalmente.
 
 ## Conteúdo aprovado
 
-Extraído do site atual, da apresentação comercial e da logo. Não inventar nada além disto.
+`referencias/textos-site-cliente.txt` é a fonte oficial dos textos do site: o cliente escreveu com palavras-chave para SEO. Não inventar nada além do que está lá (ou, para o que o documento não cobre, do site atual, da apresentação comercial e da logo).
 
-- **Headline**: "Transformamos sua presença em feiras e eventos".
-- **Apoio**: "Há [ANOS] anos criando projetos e experiências que geram resultados."
-- **Serviços**: Stands; Quiosques; Feiras e Eventos (montadora oficial); Cenografia para shows e feiras comerciais. Frases curtas de cada serviço, vindas do site atual:
-  - Stands: "Transforme sua ideia em exposição e atraia a atenção do público."
-  - Quiosques: "Exponha seus produtos e serviços e conquiste mais clientes."
-  - Feiras e Eventos: "Conte conosco como sua montadora oficial."
-  - Cenografia: "Desde shows a feiras comerciais, a estrutura que seu evento precisa."
-- **Diferenciais**:
-  - Gráfica interna: controle total sobre materiais, cores e acabamento para garantir a identidade da marca do cliente.
-  - Estruturas modernas: projetos impactantes que aumentam engajamento e destacam a empresa. Foto: estande da Guabifios (Febratex 2026), a mesma da galeria de portfólio.
-  - Equipe dedicada: do início ao fim do projeto, com pontualidade e confiabilidade.
-- **Processo** (4 etapas, ícones em `graficos/0X-*.svg`):
-  1. Briefing: entendemos seus objetivos de participação na feira.
-  2. Projeto: design estratégico e personalizado.
-  3. Produção e Montagem: processo completo da construção do stand.
-  4. Entrega Pronta: você só precisa chegar e aproveitar o evento.
-- **Missão**: cuidamos de cada detalhe do projeto, da produção e da montagem para que você foque no que realmente importa: conquistar e encantar seus clientes.
-- **CTA final**: "Pronto para se destacar?" + "Nossa equipe cuida de tudo, do projeto à desmontagem."
+- **Headline**: "Stands para Feiras e Eventos que Valorizam sua Marca".
+- **Apoio**: "Há [ANOS] anos desenvolvendo projetos e montando stands para feiras e eventos. Unimos experiência, criatividade e execução para criar stands personalizados que valorizam marcas e fortalecem a presença de empresas nos principais eventos do mercado."
+- **Serviços**:
+  - Stands para Feiras: "Projetamos, fabricamos e montamos stands personalizados para destacar sua marca e atrair o público nas principais feiras do mercado."
+  - Quiosques Comerciais: "Desenvolvemos quiosques personalizados para valorizar seus produtos, destacar sua marca e criar experiências que aproximam sua empresa dos clientes."
+  - Feiras e Eventos: "Conte com uma montadora de stands experiente para planejar e executar sua participação em feiras e eventos, do projeto à montagem."
+  - Cenografia para Eventos: "Criamos e executamos projetos de cenografia para shows, feiras e eventos corporativos, unindo criatividade, estrutura e identidade visual."
+- **Diferenciais** (título da seção: "Por que escolher a Conceito Stands?"):
+  - Gráfica interna: "Mais controle sobre materiais, cores e acabamentos para manter a identidade visual da sua marca em cada detalhe do stand."
+  - Estruturas modernas: "Projetos de stands personalizados que valorizam sua marca, destacam seus produtos e atraem a atenção do público nas feiras." Foto: estande da Guabifios (Febratex 2026), a mesma da galeria de portfólio.
+  - Equipe dedicada: "Acompanhamos cada etapa do projeto, do planejamento à montagem do stand, com organização, compromisso com os prazos e atenção aos detalhes."
+- **Processo** (título da seção: "Como funciona nosso processo?"; 4 etapas, ícones em `graficos/0X-*.svg`):
+  1. Briefing: "Entendemos os objetivos da sua empresa, as necessidades da marca e as características da feira para planejar a melhor solução para o seu espaço."
+  2. Projeto: "Desenvolvemos projetos de stands personalizados, unindo design estratégico, identidade visual e funcionalidade para valorizar sua marca."
+  3. Produção e Montagem: "Coordenamos a produção e a montagem do stand, cuidando dos detalhes para garantir uma execução organizada e alinhada ao projeto aprovado."
+  4. Entrega Pronta: "Entregamos o stand preparado para receber sua equipe e seus visitantes, para que você possa se concentrar no que importa: aproveitar a feira e gerar oportunidades de negócio."
+- **Missão** (manifesto): "Cuidamos de cada etapa do projeto, da produção à montagem do stand, para que você possa focar no que realmente importa: conquistar clientes e aproveitar ao máximo sua participação na feira."
+- **CTA final**: "Pronto para se destacar?" + "Nossa equipe cuida de tudo, do projeto à desmontagem." (não veio no documento de textos, mantido do conteúdo anterior.)
 - **Clientes atendidos**: Perego / Lentes Correct, Almata Química, Kerootica, Obra Prima, KX3, Metalring / AGEL, Geloni, Schultz, Cofemo, Fergraf, Guabifios, Squadroni, Upton.
 - **Portfólio (galeria de fotos)**: 8 stands, trocados em 2026: Upton (Fispal Tec 2026, célula de destaque), Fergraf (Formóbile 2026, foto vertical), Perego Lentes (Expoótica 2026, foto vertical), Cofemo (Formóbile 2026), Guabifios (Febratex 2026), Squadroni (Formóbile 2026), Almata Química (Formóbile 2026), Obra Prima (ProWine 2026).
 - **Nome no texto**: Conceito Stands. A logo continua "Conceito Feiras e Eventos" (marca gráfica, não muda).
-- **Tempo de mercado**: mais de 10 anos.
-- **Contatos**: Lucas Jactchak (41) 99697-4677, destino dos orçamentos; Marco Orasmo (41) 99666-6865, marco@conceitostands.com.br.
+- **Tempo de mercado**: mais de 30 anos (definido pelo cliente no documento de textos).
+- **Contatos**:
+  - Lucas Jactchak, Comercial: (41) 99697-4677, lucas@conceitostands.com.br. Destino dos orçamentos (`WHATSAPP_PRINCIPAL`).
+  - Marco Orasmo, Diretor: (41) 99666-6865, marco@conceitostands.com.br.
 - **Instagram**: @conceito.stands.
 - **Localização**: mapa do Google Maps no rodapé (perfil "Conceito Stands", https://maps.app.goo.gl/TDenwAQ8dSWAmT8z7). Endereço e horário não aparecem em texto no site.
 

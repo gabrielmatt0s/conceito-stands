@@ -569,6 +569,9 @@ body.nav-open {
 .hero__headline-set--mobile .hero__headline-line:nth-child(3) .hero__headline-line-inner {
   animation-delay: 160ms;
 }
+.hero__headline-set--mobile .hero__headline-line:nth-child(4) .hero__headline-line-inner {
+  animation-delay: 240ms;
+}
 
 .hero__headline-set--desktop .hero__headline-line:nth-child(1) .hero__headline-line-inner {
   animation-delay: 0ms;
@@ -581,6 +584,9 @@ body.nav-open {
 }
 .hero__headline-set--desktop .hero__headline-line:nth-child(4) .hero__headline-line-inner {
   animation-delay: 240ms;
+}
+.hero__headline-set--desktop .hero__headline-line:nth-child(5) .hero__headline-line-inner {
+  animation-delay: 320ms;
 }
 
 @keyframes hero-rise-in {
@@ -614,12 +620,12 @@ body.nav-open {
   font-weight: var(--weight-lead);
   line-height: var(--leading-lead);
   animation: hero-rise-in-dim 600ms ease-out both;
-  animation-delay: 240ms;
+  animation-delay: 320ms;
 }
 
 @media (min-width: 64rem) {
   .hero__lede {
-    animation-delay: 320ms;
+    animation-delay: 400ms;
   }
 }
 
@@ -635,18 +641,18 @@ body.nav-open {
 }
 
 .hero__actions .btn:nth-child(1) {
-  animation-delay: 320ms;
+  animation-delay: 400ms;
 }
 .hero__actions .btn:nth-child(2) {
-  animation-delay: 400ms;
+  animation-delay: 480ms;
 }
 
 @media (min-width: 64rem) {
   .hero__actions .btn:nth-child(1) {
-    animation-delay: 400ms;
+    animation-delay: 480ms;
   }
   .hero__actions .btn:nth-child(2) {
-    animation-delay: 480ms;
+    animation-delay: 560ms;
   }
 }
 
@@ -688,6 +694,13 @@ body.nav-open {
     padding-block: 0;
     padding-inline-start: max(var(--page-gutter), calc((100vw - var(--content-max)) / 2 + var(--page-gutter)));
     padding-inline-end: var(--space-16);
+  }
+
+  /* O título novo quebra em 5 linhas em --text-h1 (6rem): com apoio e botão,
+     passa da viewport em 1440x900. 4.5rem (ainda acima do piso de --text-h2,
+     4rem) cabe com folga sem reduzir o apoio. */
+  .hero__headline {
+    font-size: 4.5rem;
   }
 }
 
@@ -1305,6 +1318,11 @@ body.nav-open {
 
 .footer__contact-nome {
   font-weight: 600;
+}
+
+.footer__contact-cargo {
+  font-weight: 400;
+  opacity: 0.75;
 }
 
 .footer__bottom {
