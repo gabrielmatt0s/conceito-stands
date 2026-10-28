@@ -380,7 +380,7 @@
               <img
                 src="assets/img/v2/portfolio-upton-1448w.webp"
                 srcset="assets/img/v2/portfolio-upton-640w.webp 640w, assets/img/v2/portfolio-upton-1024w.webp 1024w, assets/img/v2/portfolio-upton-1448w.webp 1448w"
-                sizes="(min-width: 48rem) min(44vw, 33rem), 85vw"
+                sizes="(min-width: 48rem) min(44vw, 33rem), calc(100vw - 2.5rem)"
                 alt="Estande da Upton montado pela Conceito na Fispal Tec 2026"
                 width="1448"
                 height="1086"
@@ -399,7 +399,7 @@
               <img
                 src="assets/img/v2/portfolio-fergraf-1086w.webp"
                 srcset="assets/img/v2/portfolio-fergraf-480w.webp 480w, assets/img/v2/portfolio-fergraf-768w.webp 768w, assets/img/v2/portfolio-fergraf-1086w.webp 1086w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
+                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
                 alt="Estande da Fergraf montado pela Conceito na Formóbile 2026"
                 width="1086"
                 height="1448"
@@ -418,7 +418,7 @@
               <img
                 src="assets/img/v2/portfolio-perego-lentes-1086w.webp"
                 srcset="assets/img/v2/portfolio-perego-lentes-480w.webp 480w, assets/img/v2/portfolio-perego-lentes-768w.webp 768w, assets/img/v2/portfolio-perego-lentes-1086w.webp 1086w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
+                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
                 alt="Estande da Perego Lentes montado pela Conceito na Expoótica 2026"
                 width="1086"
                 height="1448"
@@ -437,7 +437,7 @@
               <img
                 src="assets/img/v2/portfolio-cofemo-1371w.webp"
                 srcset="assets/img/v2/portfolio-cofemo-640w.webp 640w, assets/img/v2/portfolio-cofemo-1024w.webp 1024w, assets/img/v2/portfolio-cofemo-1371w.webp 1371w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), 85vw"
+                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
                 alt="Estande da Cofemo montado pela Conceito na Formóbile 2026"
                 width="1371"
                 height="898"
@@ -451,12 +451,14 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item portfolio__item--wide" tabindex="0">
+          <button type="button" class="btn btn--primary btn--primary-on-dark portfolio__more" aria-expanded="false" aria-controls="portfolio-guabifios portfolio-squadroni portfolio-almata-quimica portfolio-obra-prima">Ver mais projetos</button>
+
+          <figure class="portfolio__item portfolio__item--wide" id="portfolio-guabifios" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-guabifios-1600w.webp"
                 srcset="assets/img/v2/portfolio-guabifios-640w.webp 640w, assets/img/v2/portfolio-guabifios-1024w.webp 1024w, assets/img/v2/portfolio-guabifios-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), 85vw"
+                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
                 alt="Estande da Guabifios montado pela Conceito na Febratex 2026"
                 width="1600"
                 height="900"
@@ -470,12 +472,12 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item portfolio__item--wide" tabindex="0">
+          <figure class="portfolio__item portfolio__item--wide" id="portfolio-squadroni" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-squadroni-1600w.webp"
                 srcset="assets/img/v2/portfolio-squadroni-640w.webp 640w, assets/img/v2/portfolio-squadroni-1024w.webp 1024w, assets/img/v2/portfolio-squadroni-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), 85vw"
+                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
                 alt="Estande da Squadroni montado pela Conceito na Formóbile 2026"
                 width="1600"
                 height="900"
@@ -489,12 +491,12 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item" tabindex="0">
+          <figure class="portfolio__item" id="portfolio-almata-quimica" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-almata-quimica-1600w.webp"
                 srcset="assets/img/v2/portfolio-almata-quimica-640w.webp 640w, assets/img/v2/portfolio-almata-quimica-1024w.webp 1024w, assets/img/v2/portfolio-almata-quimica-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
+                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
                 alt="Estande da Almata Química montado pela Conceito na Formóbile 2026"
                 width="1600"
                 height="900"
@@ -508,12 +510,12 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item" tabindex="0">
+          <figure class="portfolio__item" id="portfolio-obra-prima" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-obra-prima-1600w.webp"
                 srcset="assets/img/v2/portfolio-obra-prima-640w.webp 640w, assets/img/v2/portfolio-obra-prima-1024w.webp 1024w, assets/img/v2/portfolio-obra-prima-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), 85vw"
+                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
                 alt="Estande da Obra Prima montado pela Conceito na ProWine 2026"
                 width="1600"
                 height="900"
@@ -527,8 +529,6 @@
             </figcaption>
           </figure>
         </div>
-        <p class="portfolio__counter" aria-live="polite">01 / 08</p>
-        <p class="portfolio__hint">Arraste para ver mais →</p>
       </div>
     </section>
 
@@ -653,6 +653,20 @@
       <path d="M11.5 11.2c.3-.6.6-.6.9-.6h.7c.2 0 .5 0 .7.5.3.6.9 2.1.9 2.3.1.2.1.4 0 .6-.1.2-.2.3-.4.5l-.5.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.4 1.5 2.7 1.6.3.1.5.1.7-.1l.7-.8c.2-.3.5-.2.7-.1l1.9 1c.2.1.4.2.4.4.1.2.1 1-.2 1.9-.3.9-1.8 1.7-2.5 1.8-.7.1-1.5.2-4.8-1.2-3.3-1.5-5.2-4.9-5.3-5.1-.1-.2-.9-1.3-.9-2.6 0-1.3.6-1.9.8-2.2Z" fill="currentColor" />
     </svg>
   </a>
+
+  <div class="portfolio-lightbox" id="portfolio-lightbox" hidden>
+    <button type="button" class="portfolio-lightbox__close" id="portfolio-lightbox-close" aria-label="Fechar visualização">&times;</button>
+    <button type="button" class="portfolio-lightbox__nav portfolio-lightbox__nav--prev" id="portfolio-lightbox-prev" aria-label="Foto anterior">&#8249;</button>
+    <button type="button" class="portfolio-lightbox__nav portfolio-lightbox__nav--next" id="portfolio-lightbox-next" aria-label="Próxima foto">&#8250;</button>
+    <figure class="portfolio-lightbox__figure" id="portfolio-lightbox-figure">
+      <img class="portfolio-lightbox__img" id="portfolio-lightbox-img" src="" alt="" sizes="94vw" />
+      <figcaption class="portfolio-lightbox__caption">
+        <span class="portfolio-lightbox__client" id="portfolio-lightbox-client"></span>
+        <span class="portfolio-lightbox__fair" id="portfolio-lightbox-fair"></span>
+        <span class="portfolio-lightbox__counter" id="portfolio-lightbox-counter"></span>
+      </figcaption>
+    </figure>
+  </div>
 
   <script src="js/config.js"></script>
   <script src="js/main.js" defer></script>

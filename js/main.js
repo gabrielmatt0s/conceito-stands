@@ -317,22 +317,274 @@
     });
   }
 
-  // "Arraste para ver mais" do carrossel de portfólio: some depois do primeiro arraste.
-  // Ouve "pointerdown" (início real de um toque/arraste), não "scroll": o
-  // scroll-snap corrige a posição sozinho ao carregar a página e dispara um
-  // evento de scroll sem o usuário tocar em nada, o que escondia a dica cedo demais.
-  function setupSwipeHint(carouselSelector, hintSelector) {
-    var carousel = document.querySelector(carouselSelector);
-    var hint = document.querySelector(hintSelector);
-    if (!carousel || !hint) return;
+  // ---------- Portfólio no mobile: lista com "Ver mais projetos" + lightbox ----------
+  // As 4 últimas figuras (Guabifios, Squadroni, Almata Química, Obra Prima) já
+  // nascem com o atributo hidden no próprio HTML, não aplicado depois por JS:
+  // loading="lazy" sozinho não é suficiente (o scanner de pré-carregamento do
+  // Chrome ainda baixa a primeira foto escondida antes do JS rodar, por ela
+  // ficar perto da dobra), então só travar o display:none desde o HTML evita
+  // essa corrida. O CSS (@media min-width: 48rem) força essas 4 de volta pra
+  // display:flex no desktop, então a grade de sempre continua intacta ali
+  // mesmo sem esperar o JS. Abaixo de 768px (mesmo ponto de corte do CSS em
+  // @media max-width: 47.99rem): "Ver mais projetos" revela o resto com fade
+  // e move o foco pra 5ª foto; tocar em qualquer foto (mostrada ou não) abre
+  // a mesma visualização em tela cheia. Em 768px+ os gatilhos de clique/
+  // teclado não são ligados, então a grade de sempre continua intacta.
+  function setupPortfolio() {
+    var section = document.getElementById("portfolio");
+    var grid = section ? section.querySelector(".portfolio__grid") : null;
+    var moreBtn = section ? section.querySelector(".portfolio__more") : null;
+    var lightbox = document.getElementById("portfolio-lightbox");
+    if (!section || !grid || !moreBtn || !lightbox) return;
 
-    carousel.addEventListener(
-      "pointerdown",
-      function () {
-        hint.classList.add("is-hidden");
-      },
-      { once: true, passive: true }
-    );
+    var items = Array.prototype.slice.call(grid.querySelectorAll(".portfolio__item"));
+    if (!items.length) return;
+    var hiddenItems = items.slice(4);
+
+    var mobileQuery = window.matchMedia("(max-width: 47.99rem)");
+    var reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var expanded = false;
+
+    // ---------- Lightbox: abre a partir de QUALQUER item (visível ou não via "Ver mais") ----------
+
+    var lbImg = document.getElementById("portfolio-lightbox-img");
+    var lbClient = document.getElementById("portfolio-lightbox-client");
+    var lbFair = document.getElementById("portfolio-lightbox-fair");
+    var lbCounter = document.getElementById("portfolio-lightbox-counter");
+    var lbFigure = document.getElementById("portfolio-lightbox-figure");
+    var lbClose = document.getElementById("portfolio-lightbox-close");
+    var lbPrev = document.getElementById("portfolio-lightbox-prev");
+    var lbNext = document.getElementById("portfolio-lightbox-next");
+    var focusableLbControls = [lbClose, lbPrev, lbNext];
+    var lbIndex = 0;
+    var lbLastFocused = null;
+
+    function pad2(n) {
+      return n < 10 ? "0" + n : String(n);
+    }
+
+    function itemData(item) {
+      var img = item.querySelector(".portfolio__frame img");
+      var client = item.querySelector(".portfolio__client");
+      var fair = item.querySelector(".portfolio__fair");
+      return {
+        src: img ? img.currentSrc || img.src : "",
+        srcset: img ? img.getAttribute("srcset") || "" : "",
+        alt: img ? img.getAttribute("alt") || "" : "",
+        width: img ? img.getAttribute("width") : null,
+        height: img ? img.getAttribute("height") : null,
+        client: client ? client.textContent.trim() : "",
+        fair: fair ? fair.textContent.trim() : "",
+      };
+    }
+
+    function itemLabel(item) {
+      var data = itemData(item);
+      return "Ver em tela cheia: " + data.client + (data.fair ? ", " + data.fair : "");
+    }
+
+    function renderLightbox() {
+      var data = itemData(items[lbIndex]);
+      lbImg.src = data.src;
+      lbImg.srcset = data.srcset;
+      lbImg.alt = data.alt;
+      if (data.width) lbImg.setAttribute("width", data.width);
+      if (data.height) lbImg.setAttribute("height", data.height);
+      lbClient.textContent = data.client;
+      lbFair.textContent = data.fair;
+      lbCounter.textContent = pad2(lbIndex + 1) + " / " + pad2(items.length);
+    }
+
+    function openLightbox(index, triggerEl) {
+      lbIndex = index;
+      lbLastFocused = triggerEl || document.activeElement;
+      renderLightbox();
+      lightbox.hidden = false;
+      document.body.classList.add("portfolio-lightbox-open");
+      document.addEventListener("keydown", onLightboxKeydown);
+      lbClose.focus();
+    }
+
+    function closeLightbox() {
+      if (lightbox.hidden) return;
+      lightbox.hidden = true;
+      document.body.classList.remove("portfolio-lightbox-open");
+      document.removeEventListener("keydown", onLightboxKeydown);
+      if (lbLastFocused && typeof lbLastFocused.focus === "function") lbLastFocused.focus();
+    }
+
+    function showPrev() {
+      lbIndex = (lbIndex - 1 + items.length) % items.length;
+      renderLightbox();
+    }
+
+    function showNext() {
+      lbIndex = (lbIndex + 1) % items.length;
+      renderLightbox();
+    }
+
+    function onLightboxKeydown(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeLightbox();
+      } else if (event.key === "ArrowLeft") {
+        showPrev();
+      } else if (event.key === "ArrowRight") {
+        showNext();
+      } else if (event.key === "Tab") {
+        // Foco preso: só close/prev/next são focáveis dentro do lightbox.
+        var first = focusableLbControls[0];
+        var last = focusableLbControls[focusableLbControls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    lbClose.addEventListener("click", closeLightbox);
+    lbPrev.addEventListener("click", showPrev);
+    lbNext.addEventListener("click", showNext);
+
+    lightbox.addEventListener("click", function (event) {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    var dragStartX = 0;
+    var dragDeltaX = 0;
+    var dragging = false;
+
+    lbFigure.addEventListener("pointerdown", function (event) {
+      dragging = true;
+      dragStartX = event.clientX;
+      dragDeltaX = 0;
+      lbImg.style.transition = "none";
+      if (lbFigure.setPointerCapture) {
+        try {
+          lbFigure.setPointerCapture(event.pointerId);
+        } catch (err) {}
+      }
+    });
+
+    lbFigure.addEventListener("pointermove", function (event) {
+      if (!dragging) return;
+      dragDeltaX = event.clientX - dragStartX;
+      lbImg.style.transform = "translateX(" + dragDeltaX + "px)";
+    });
+
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      lbImg.style.transition = "";
+      lbImg.style.transform = "";
+      if (Math.abs(dragDeltaX) > 60) {
+        if (dragDeltaX > 0) showPrev();
+        else showNext();
+      }
+      dragDeltaX = 0;
+    }
+
+    lbFigure.addEventListener("pointerup", endDrag);
+    lbFigure.addEventListener("pointercancel", endDrag);
+
+    // ---------- Gatilhos de cada foto (só ligados no mobile) ----------
+
+    function onItemClick(event) {
+      if (!mobileQuery.matches) return;
+      var index = items.indexOf(event.currentTarget);
+      if (index !== -1) openLightbox(index, event.currentTarget);
+    }
+
+    function onItemKeydown(event) {
+      if (!mobileQuery.matches) return;
+      if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+        event.preventDefault();
+        onItemClick(event);
+      }
+    }
+
+    items.forEach(function (item) {
+      item.addEventListener("click", onItemClick);
+      item.addEventListener("keydown", onItemKeydown);
+    });
+
+    // ---------- "Ver mais projetos" / "Ver menos" ----------
+
+    function collapse() {
+      hiddenItems.forEach(function (item) {
+        item.hidden = true;
+      });
+      moreBtn.textContent = "Ver mais projetos";
+      moreBtn.setAttribute("aria-expanded", "false");
+      expanded = false;
+    }
+
+    function expand() {
+      hiddenItems.forEach(function (item) {
+        item.hidden = false;
+      });
+      moreBtn.textContent = "Ver menos";
+      moreBtn.setAttribute("aria-expanded", "true");
+      expanded = true;
+
+      if (!reduceMotionQuery.matches) {
+        hiddenItems.forEach(function (item) {
+          item.style.opacity = "0";
+        });
+        // Força o navegador a aplicar opacity:0 antes de animar pra opacity:1.
+        void grid.offsetHeight;
+        hiddenItems.forEach(function (item) {
+          item.style.transition = "opacity 300ms";
+          item.style.opacity = "1";
+        });
+        window.setTimeout(function () {
+          hiddenItems.forEach(function (item) {
+            item.style.transition = "";
+            item.style.opacity = "";
+          });
+        }, 320);
+      }
+
+      if (hiddenItems[0]) hiddenItems[0].focus();
+    }
+
+    moreBtn.addEventListener("click", function () {
+      if (expanded) {
+        collapse();
+        section.scrollIntoView({ block: "start" });
+      } else {
+        expand();
+      }
+    });
+
+    // ---------- Liga/desliga tudo conforme a largura da tela ----------
+
+    function syncResponsiveState() {
+      if (mobileQuery.matches) {
+        items.forEach(function (item) {
+          item.setAttribute("role", "button");
+          item.setAttribute("aria-label", itemLabel(item));
+        });
+        collapse();
+      } else {
+        closeLightbox();
+        items.forEach(function (item) {
+          item.removeAttribute("role");
+          item.removeAttribute("aria-label");
+        });
+        hiddenItems.forEach(function (item) {
+          item.hidden = false;
+        });
+        moreBtn.setAttribute("aria-expanded", "false");
+        expanded = false;
+      }
+    }
+
+    mobileQuery.addEventListener("change", syncResponsiveState);
+    syncResponsiveState();
   }
 
   function setupQuoteForm() {
@@ -439,7 +691,6 @@
     setupQuoteForm();
     injectLocalBusinessSchema();
     setupCarouselCounter(".diferenciais__list", ".diferencial", ".diferenciais__counter");
-    setupCarouselCounter(".portfolio__grid", ".portfolio__item", ".portfolio__counter", true);
-    setupSwipeHint(".portfolio__grid", ".portfolio__hint");
+    setupPortfolio();
   });
 })();

@@ -124,6 +124,8 @@ textarea:focus-visible {
 .hero button:focus-visible,
 #contato button:focus-visible,
 #contato input:focus-visible,
+#portfolio button:focus-visible,
+.portfolio-lightbox button:focus-visible,
 .whatsapp-fab:focus-visible {
   outline-color: var(--color-focus-dark);
 }
@@ -377,7 +379,8 @@ textarea:focus-visible {
   color: var(--color-mint);
 }
 
-body.nav-open {
+body.nav-open,
+body.portfolio-lightbox-open {
   overflow: hidden;
 }
 
@@ -1083,8 +1086,7 @@ body.nav-open {
   letter-spacing: normal;
 }
 
-.portfolio__counter,
-.portfolio__hint {
+.portfolio__more {
   display: none;
 }
 
@@ -1396,6 +1398,109 @@ body.nav-open {
   }
 }
 
+/* ---------- Lightbox do portfólio (mobile) ---------- */
+/* Fica pronta em qualquer largura, mas só abre no mobile: js/main.js só
+   remove o atributo hidden e liga os gatilhos abaixo de 768px, então no
+   desktop isto nunca aparece nem reage a clique. */
+
+.portfolio-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgb(0 37 56 / .94);
+}
+
+.portfolio-lightbox[hidden] {
+  display: none;
+}
+
+.portfolio-lightbox__figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 94vw;
+  touch-action: none;
+}
+
+.portfolio-lightbox__img {
+  max-width: 94vw;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.portfolio-lightbox__caption {
+  text-align: center;
+  color: var(--color-off-white);
+}
+
+.portfolio-lightbox__client {
+  display: block;
+  font-weight: 600;
+  letter-spacing: var(--tracking-caption);
+}
+
+.portfolio-lightbox__fair {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-caption);
+  opacity: 0.75;
+}
+
+.portfolio-lightbox__counter {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-caption);
+  color: var(--color-off-white);
+  opacity: 0.7;
+}
+
+.portfolio-lightbox__close,
+.portfolio-lightbox__nav {
+  position: fixed;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgb(242 245 244 / .12);
+  color: var(--color-off-white);
+  border: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.portfolio-lightbox__close:hover,
+.portfolio-lightbox__nav:hover {
+  background: rgb(242 245 244 / .22);
+}
+
+.portfolio-lightbox__close {
+  top: var(--space-4);
+  right: var(--space-4);
+}
+
+.portfolio-lightbox__nav--prev {
+  top: 50%;
+  left: var(--space-4);
+  transform: translateY(-50%);
+}
+
+.portfolio-lightbox__nav--next {
+  top: 50%;
+  right: var(--space-4);
+  transform: translateY(-50%);
+}
+
 /* ======================================================================
    REDESIGN MOBILE (abaixo de 768px)
    Tudo aqui dentro é exclusivo de telas estreitas. O desktop (768px+) não
@@ -1591,56 +1696,33 @@ body.nav-open {
     margin-top: var(--space-1, 0.25rem);
   }
 
-  /* ---------- 5. Portfólio: carrossel horizontal, cards verticais ---------- */
+  /* ---------- 5. Portfólio: lista vertical, fotos inteiras + "Ver mais projetos" ---------- */
 
   .portfolio__grid {
     display: flex;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--page-gutter);
-    gap: var(--space-4);
-    margin-inline: calc(var(--page-gutter) * -1);
-    padding-inline: var(--page-gutter);
-    scrollbar-width: none;
+    flex-direction: column;
+    gap: var(--space-8);
   }
 
-  .portfolio__grid::-webkit-scrollbar {
+  .portfolio__item[hidden] {
     display: none;
   }
 
-  .portfolio__item {
-    flex: 0 0 85vw;
-    scroll-snap-align: start;
+  .portfolio__frame {
+    aspect-ratio: auto;
   }
 
-  .portfolio__frame,
-  .portfolio__item--wide .portfolio__frame,
-  .portfolio__item--tall .portfolio__frame {
-    aspect-ratio: 4 / 5;
+  .portfolio__frame img {
+    height: auto;
+    object-fit: contain;
   }
 
-  .portfolio__counter {
-    display: block;
-    margin-top: var(--space-4);
-    text-align: center;
-    color: var(--color-off-white);
-    opacity: 0.85;
-    font-size: var(--text-caption);
+  .portfolio__item:hover .portfolio__frame img {
+    transform: none;
   }
 
-  .portfolio__hint {
-    display: block;
-    margin-top: var(--space-2);
-    text-align: center;
-    color: var(--color-off-white);
-    opacity: 0.6;
-    font-size: var(--text-caption);
-    transition: opacity var(--transition-base);
-  }
-
-  .portfolio__hint.is-hidden {
-    opacity: 0;
+  .portfolio__more {
+    display: flex;
   }
 
   /* ---------- 6. Manifesto: frase menor para caber em até 6 linhas ---------- */
@@ -1691,5 +1773,17 @@ body.nav-open {
 
   .footer__bottom {
     margin-top: var(--space-4);
+  }
+}
+
+/* Guabifios, Squadroni, Almata Química e Obra Prima já nascem com o atributo
+   hidden no HTML (ver comentário de setupPortfolio em js/main.js: evita que o
+   scanner de pré-carregamento baixe a 1ª foto escondida antes do JS rodar).
+   Acima de 768px isso é desfeito aqui mesmo, sem depender do JS: a grade
+   continua com as 8 fotos de sempre, inclusive numa troca de largura sem
+   recarregar a página (ex.: redimensionar a janela do DevTools). */
+@media (min-width: 48rem) {
+  .portfolio__item[hidden] {
+    display: flex;
   }
 }
