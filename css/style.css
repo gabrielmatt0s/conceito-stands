@@ -626,6 +626,17 @@ body.portfolio-lightbox-open {
   }
 }
 
+/* Abaixo de 430px a linha de apoio (texto inalterado) passa de 7 para até
+   6 linhas num Safari real (o emulador, sem a mesma fonte do sistema,
+   já quebrava em 6 com --text-lead): --text-lead (1.125rem) vira
+   --text-body (1rem), com entrelinha um pouco mais apertada. */
+@media (max-width: 429px) {
+  .hero__lede {
+    font-size: var(--text-body);
+    line-height: var(--leading-lead);
+  }
+}
+
 .hero__actions {
   display: flex;
   flex-direction: column;
@@ -1521,8 +1532,13 @@ body.portfolio-lightbox-open {
 
   /* ---------- 1. Hero: foto em tela cheia, texto ancorado na base ---------- */
 
+  /* 100vh primeiro (navegadores sem lvh ignoram a linha de baixo e ficam só
+     com essa); 100lvh depois, para o vídeo continuar atrás da barra inferior
+     translúcida do Safari no iOS em vez de terminar antes dela (o que deixava
+     a seção seguinte visível atrás do vidro da barra). */
   .hero {
-    min-height: 100svh;
+    min-height: 100vh;
+    min-height: 100lvh;
   }
 
   .hero__media {
@@ -1544,7 +1560,13 @@ body.portfolio-lightbox-open {
 
   .hero__content {
     align-items: flex-end;
+    /* Fallback simples primeiro. A segunda declaração só entra em navegadores
+       com suporte a lvh/svh/env (senão o calc() inteiro é inválido e é
+       ignorado, mantendo a primeira): (100lvh - 100svh) é quanto a barra do
+       Safari "come" da tela quando está expandida, somado à área segura
+       inferior (home indicator), para os botões nunca ficarem atrás da barra. */
     padding-block: 0 var(--space-8);
+    padding-block: 0 calc(var(--space-8) + (100lvh - 100svh) + env(safe-area-inset-bottom));
   }
 
   .hero__wireframe {
@@ -1581,6 +1603,13 @@ body.portfolio-lightbox-open {
 
   .hero__actions .btn--outline-on-dark::after {
     content: " →";
+  }
+
+  /* Mesma folga da barra do Safari que o .hero__content usa acima, pro botão
+     de pausar o vídeo não ficar escondido atrás dela. */
+  .hero__video-toggle {
+    bottom: var(--space-4);
+    bottom: calc(var(--space-4) + (100lvh - 100svh) + env(safe-area-inset-bottom));
   }
 
   /* ---------- 2. Serviços: lista com hairline, número + nome na mesma linha ---------- */
