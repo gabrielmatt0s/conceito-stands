@@ -6,19 +6,21 @@
   <title>Stands para Feiras e Eventos em Curitiba | Conceito Stands</title>
   <meta name="description" content="Há mais de 30 anos projetando, fabricando e montando stands personalizados para feiras e eventos. Stands, quiosques comerciais e cenografia em Curitiba e região." />
   <meta name="theme-color" content="#002538" />
+  <link rel="canonical" href="https://conceitostands.com.br/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://conceitostands.com.br/" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:title" content="Stands para Feiras e Eventos em Curitiba | Conceito Stands" />
   <meta property="og:description" content="Há mais de 30 anos projetando, fabricando e montando stands personalizados para feiras e eventos. Stands, quiosques comerciais e cenografia em Curitiba e região." />
-  <meta property="og:image" content="assets/brand/social/og-image.png" />
+  <meta property="og:image" content="https://conceitostands.com.br/assets/brand/social/og-image.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Stands para Feiras e Eventos em Curitiba | Conceito Stands" />
   <meta name="twitter:description" content="Há mais de 30 anos projetando, fabricando e montando stands personalizados para feiras e eventos. Stands, quiosques comerciais e cenografia em Curitiba e região." />
-  <meta name="twitter:image" content="assets/brand/social/og-image.png" />
+  <meta name="twitter:image" content="https://conceitostands.com.br/assets/brand/social/og-image.png" />
 
   <!-- Favicons e manifest do kit -->
   <link rel="icon" href="assets/brand/favicon/favicon.ico" sizes="any" />
@@ -45,6 +47,22 @@
 
   <link rel="stylesheet" href="assets/brand/css/tokens.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Google Analytics 4 (G-JXP76Q5CXV): só mede no domínio oficial e carrega depois da página, para não pesar no carregamento -->
+  <script>
+    (function () {
+      if (location.hostname !== "conceitostands.com.br") return;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag("js", new Date());
+      gtag("config", "G-JXP76Q5CXV");
+      window.addEventListener("load", function () {
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-JXP76Q5CXV";
+        document.head.appendChild(s);
+      });
+    })();
+  </script>
 </head>
 <body>
   <a class="sr-only" href="#conteudo-principal">Pular para o conteúdo principal</a>
@@ -375,45 +393,26 @@
         <h2 class="section__heading" id="portfolio-heading">Portfólio</h2>
 
         <div class="portfolio__grid" role="region" aria-label="Portfólio da Conceito, carrossel" tabindex="0">
-          <figure class="portfolio__item portfolio__item--feature" tabindex="0">
+          <figure id="portfolio-obra-prima" class="portfolio__item" tabindex="0">
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-upton-1448w.webp"
-                srcset="assets/img/v2/portfolio-upton-640w.webp 640w, assets/img/v2/portfolio-upton-1024w.webp 1024w, assets/img/v2/portfolio-upton-1448w.webp 1448w"
-                sizes="(min-width: 48rem) min(44vw, 33rem), calc(100vw - 2.5rem)"
-                alt="Estande da Upton montado pela Conceito na Fispal Tec 2026"
-                width="1448"
-                height="1086"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <figcaption class="portfolio__caption">
-              <span class="portfolio__client">Upton</span>
-              <span class="portfolio__fair">Fispal Tec 2026</span>
-            </figcaption>
-          </figure>
-
-          <figure class="portfolio__item portfolio__item--tall" tabindex="0">
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-fergraf-1086w.webp"
-                srcset="assets/img/v2/portfolio-fergraf-480w.webp 480w, assets/img/v2/portfolio-fergraf-768w.webp 768w, assets/img/v2/portfolio-fergraf-1086w.webp 1086w"
+                src="assets/img/v2/portfolio-obra-prima-1600w.webp"
+                srcset="assets/img/v2/portfolio-obra-prima-640w.webp 640w, assets/img/v2/portfolio-obra-prima-1024w.webp 1024w, assets/img/v2/portfolio-obra-prima-1600w.webp 1600w"
                 sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
-                alt="Estande da Fergraf montado pela Conceito na Formóbile 2026"
-                width="1086"
-                height="1448"
+                alt="Estande da Obra Prima montado pela Conceito na ProWine 2026"
+                width="1600"
+                height="900"
                 loading="lazy"
                 decoding="async"
               />
             </div>
             <figcaption class="portfolio__caption">
-              <span class="portfolio__client">Fergraf</span>
-              <span class="portfolio__fair">Formóbile 2026</span>
+              <span class="portfolio__client">Obra Prima</span>
+              <span class="portfolio__fair">ProWine 2026</span>
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item portfolio__item--tall" tabindex="0">
+          <figure id="portfolio-perego-lentes" class="portfolio__item portfolio__item--tall" tabindex="0">
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-perego-lentes-1086w.webp"
@@ -432,7 +431,47 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item portfolio__item--wide" tabindex="0">
+          <figure id="portfolio-upton" class="portfolio__item portfolio__item--feature" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-upton-1448w.webp"
+                srcset="assets/img/v2/portfolio-upton-640w.webp 640w, assets/img/v2/portfolio-upton-1024w.webp 1024w, assets/img/v2/portfolio-upton-1448w.webp 1448w"
+                sizes="(min-width: 48rem) min(44vw, 33rem), calc(100vw - 2.5rem)"
+                alt="Estande da Upton montado pela Conceito na Fispal Tec 2026"
+                width="1448"
+                height="1086"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Upton</span>
+              <span class="portfolio__fair">Fispal Tec 2026</span>
+            </figcaption>
+          </figure>
+
+          <figure id="portfolio-fergraf" class="portfolio__item portfolio__item--tall" tabindex="0">
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-fergraf-1086w.webp"
+                srcset="assets/img/v2/portfolio-fergraf-480w.webp 480w, assets/img/v2/portfolio-fergraf-768w.webp 768w, assets/img/v2/portfolio-fergraf-1086w.webp 1086w"
+                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
+                alt="Estande da Fergraf montado pela Conceito na Formóbile 2026"
+                width="1086"
+                height="1448"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">Fergraf</span>
+              <span class="portfolio__fair">Formóbile 2026</span>
+            </figcaption>
+          </figure>
+
+          <button type="button" class="btn btn--primary btn--primary-on-dark portfolio__more" aria-expanded="false" aria-controls="portfolio-cofemo portfolio-guabifios portfolio-squadroni portfolio-almata-quimica portfolio-kx3-eletrolar portfolio-kx3-eletrolar-2">Ver mais projetos</button>
+
+          <figure id="portfolio-cofemo" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-cofemo-1371w.webp"
@@ -451,9 +490,7 @@
             </figcaption>
           </figure>
 
-          <button type="button" class="btn btn--primary btn--primary-on-dark portfolio__more" aria-expanded="false" aria-controls="portfolio-guabifios portfolio-squadroni portfolio-almata-quimica portfolio-obra-prima">Ver mais projetos</button>
-
-          <figure class="portfolio__item portfolio__item--wide" id="portfolio-guabifios" tabindex="0" hidden>
+          <figure id="portfolio-guabifios" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-guabifios-1600w.webp"
@@ -472,7 +509,7 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item portfolio__item--wide" id="portfolio-squadroni" tabindex="0" hidden>
+          <figure id="portfolio-squadroni" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-squadroni-1600w.webp"
@@ -491,7 +528,7 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item" id="portfolio-almata-quimica" tabindex="0" hidden>
+          <figure id="portfolio-almata-quimica" class="portfolio__item" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
                 src="assets/img/v2/portfolio-almata-quimica-1600w.webp"
@@ -510,13 +547,13 @@
             </figcaption>
           </figure>
 
-          <figure class="portfolio__item" id="portfolio-obra-prima" tabindex="0" hidden>
+          <figure id="portfolio-kx3-eletrolar" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
             <div class="portfolio__frame">
               <img
-                src="assets/img/v2/portfolio-obra-prima-1600w.webp"
-                srcset="assets/img/v2/portfolio-obra-prima-640w.webp 640w, assets/img/v2/portfolio-obra-prima-1024w.webp 1024w, assets/img/v2/portfolio-obra-prima-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
-                alt="Estande da Obra Prima montado pela Conceito na ProWine 2026"
+                src="assets/img/v2/portfolio-kx3-eletrolar-1600w.webp"
+                srcset="assets/img/v2/portfolio-kx3-eletrolar-640w.webp 640w, assets/img/v2/portfolio-kx3-eletrolar-1024w.webp 1024w, assets/img/v2/portfolio-kx3-eletrolar-1600w.webp 1600w"
+                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
+                alt="Estande da KX3 Acessórios Automotivos montado pela Conceito na Eletrolar 2026"
                 width="1600"
                 height="900"
                 loading="lazy"
@@ -524,8 +561,27 @@
               />
             </div>
             <figcaption class="portfolio__caption">
-              <span class="portfolio__client">Obra Prima</span>
-              <span class="portfolio__fair">ProWine 2026</span>
+              <span class="portfolio__client">KX3 Acessórios</span>
+              <span class="portfolio__fair">Eletrolar 2026</span>
+            </figcaption>
+          </figure>
+
+          <figure id="portfolio-kx3-eletrolar-2" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
+            <div class="portfolio__frame">
+              <img
+                src="assets/img/v2/portfolio-kx3-eletrolar-2-1600w.webp"
+                srcset="assets/img/v2/portfolio-kx3-eletrolar-2-640w.webp 640w, assets/img/v2/portfolio-kx3-eletrolar-2-1024w.webp 1024w, assets/img/v2/portfolio-kx3-eletrolar-2-1600w.webp 1600w"
+                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
+                alt="Estande da KX3 Acessórios Automotivos montado pela Conceito na Eletrolar 2026, vista frontal"
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="portfolio__caption">
+              <span class="portfolio__client">KX3 Acessórios</span>
+              <span class="portfolio__fair">Eletrolar 2026</span>
             </figcaption>
           </figure>
         </div>

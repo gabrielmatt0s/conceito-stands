@@ -1816,7 +1816,7 @@ body.portfolio-lightbox-open {
   }
 }
 
-/* Guabifios, Squadroni, Almata Química e Obra Prima já nascem com o atributo
+/* Cofemo, Guabifios, Squadroni, Almata Química e as 2 da KX3 já nascem com o atributo
    hidden no HTML (ver comentário de setupPortfolio em js/main.js: evita que o
    scanner de pré-carregamento baixe a 1ª foto escondida antes do JS rodar).
    Acima de 768px isso é desfeito aqui mesmo, sem depender do JS: a grade
@@ -1825,5 +1825,24 @@ body.portfolio-lightbox-open {
 @media (min-width: 48rem) {
   .portfolio__item[hidden] {
     display: flex;
+  }
+
+  /* O HTML segue a ordem do mobile (destaques pedidos pelo cliente: Obra Prima,
+     Perego, Upton, Fergraf). No desktop a grade mantém a composição original. */
+  #portfolio-upton { order: 1; }
+  #portfolio-fergraf { order: 2; }
+  #portfolio-perego-lentes { order: 3; }
+  #portfolio-cofemo { order: 4; }
+  #portfolio-guabifios { order: 5; }
+  #portfolio-squadroni { order: 6; }
+  #portfolio-almata-quimica { order: 7; }
+  #portfolio-obra-prima { order: 8; }
+  #portfolio-kx3-eletrolar { order: 9; }
+  #portfolio-kx3-eletrolar-2 { order: 10; }
+
+  /* Fotos da KX3 são 16:9; no formato largo (8:3) alinha pelo topo para não cortar o letreiro. */
+  #portfolio-kx3-eletrolar .portfolio__frame img,
+  #portfolio-kx3-eletrolar-2 .portfolio__frame img {
+    object-position: center top;
   }
 }

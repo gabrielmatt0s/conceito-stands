@@ -318,7 +318,7 @@
   }
 
   // ---------- Portfólio no mobile: lista com "Ver mais projetos" + lightbox ----------
-  // As 4 últimas figuras (Guabifios, Squadroni, Almata Química, Obra Prima) já
+  // As figuras a partir da 5ª (Cofemo, Guabifios, Squadroni, Almata Química, KX3 x2) já
   // nascem com o atributo hidden no próprio HTML, não aplicado depois por JS:
   // loading="lazy" sozinho não é suficiente (o scanner de pré-carregamento do
   // Chrome ainda baixa a primeira foto escondida antes do JS rodar, por ela

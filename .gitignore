@@ -20,3 +20,4 @@ bruto/
 
 .vercel
 .env*
+deploy/
