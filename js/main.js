@@ -383,6 +383,10 @@
       return "Ver em tela cheia: " + data.client + (data.fair ? ", " + data.fair : "");
     }
 
+    function itemTrigger(item) {
+      return item.querySelector(".portfolio__trigger");
+    }
+
     function renderLightbox() {
       var data = itemData(items[lbIndex]);
       lbImg.src = data.src;
@@ -494,21 +498,15 @@
 
     function onItemClick(event) {
       if (!mobileQuery.matches) return;
-      var index = items.indexOf(event.currentTarget);
+      var item = event.currentTarget.closest(".portfolio__item");
+      var index = items.indexOf(item);
       if (index !== -1) openLightbox(index, event.currentTarget);
     }
 
-    function onItemKeydown(event) {
-      if (!mobileQuery.matches) return;
-      if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
-        event.preventDefault();
-        onItemClick(event);
-      }
-    }
-
+    // Sem handler de keydown: é um <button> nativo agora, Enter/Espaço já
+    // disparam "click" sozinhos (ver onItemClick), sem precisar reimplementar.
     items.forEach(function (item) {
-      item.addEventListener("click", onItemClick);
-      item.addEventListener("keydown", onItemKeydown);
+      itemTrigger(item).addEventListener("click", onItemClick);
     });
 
     // ---------- "Ver mais projetos" / "Ver menos" ----------
@@ -548,7 +546,7 @@
         }, 320);
       }
 
-      if (hiddenItems[0]) hiddenItems[0].focus();
+      if (hiddenItems[0]) itemTrigger(hiddenItems[0]).focus();
     }
 
     moreBtn.addEventListener("click", function () {
@@ -565,15 +563,19 @@
     function syncResponsiveState() {
       if (mobileQuery.matches) {
         items.forEach(function (item) {
-          item.setAttribute("role", "button");
-          item.setAttribute("aria-label", itemLabel(item));
+          var trigger = itemTrigger(item);
+          trigger.disabled = false;
+          trigger.setAttribute("aria-label", itemLabel(item));
         });
         collapse();
       } else {
         closeLightbox();
         items.forEach(function (item) {
-          item.removeAttribute("role");
-          item.removeAttribute("aria-label");
+          var trigger = itemTrigger(item);
+          // No desktop não existe lightbox (ver onItemClick): desativa o
+          // botão em vez de deixar focável/anunciado sem fazer nada ao ativar.
+          trigger.disabled = true;
+          trigger.removeAttribute("aria-label");
         });
         hiddenItems.forEach(function (item) {
           item.hidden = false;

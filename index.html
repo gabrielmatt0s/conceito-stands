@@ -45,22 +45,63 @@
     fetchpriority="high"
   />
 
-  <link rel="stylesheet" href="assets/brand/css/tokens.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <!-- Google Analytics 4 (G-JXP76Q5CXV): só mede no domínio oficial e carrega depois da página, para não pesar no carregamento -->
+  <link rel="stylesheet" href="assets/brand/css/tokens.css?v=20261029" />
+  <link rel="stylesheet" href="css/style.css?v=20261029-perf5" />
+  <!-- Google Analytics 4 (G-JXP76Q5CXV): só mede no domínio oficial, carrega depois da página e respeita o aviso de cookies (Consent Mode). -->
   <script>
     (function () {
+      var consent = null;
+      try { consent = localStorage.getItem("cs-consent"); } catch (e) {}
+      window.csConsent = consent;
       if (location.hostname !== "conceitostands.com.br") return;
       window.dataLayer = window.dataLayer || [];
       window.gtag = function () { dataLayer.push(arguments); };
+      gtag("consent", "default", {
+        analytics_storage: consent === "granted" ? "granted" : "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
+      });
       gtag("js", new Date());
       gtag("config", "G-JXP76Q5CXV");
-      window.addEventListener("load", function () {
+
+      // Script do gtag.js carrega só na primeira interação (scroll, toque,
+      // clique ou tecla) ou 4s depois do load, o que vier primeiro: tira o
+      // script do caminho crítico do mobile sem perder nenhum evento (o
+      // dataLayer já enfileira tudo antes do script chegar).
+      var gtagScriptLoaded = false;
+      function loadGtagScript() {
+        if (gtagScriptLoaded) return;
+        gtagScriptLoaded = true;
         var s = document.createElement("script");
         s.async = true;
         s.src = "https://www.googletagmanager.com/gtag/js?id=G-JXP76Q5CXV";
         document.head.appendChild(s);
+      }
+      ["scroll", "touchstart", "click", "keydown"].forEach(function (evt) {
+        window.addEventListener(evt, loadGtagScript, { passive: true, once: true });
       });
+      window.addEventListener("load", function () {
+        window.setTimeout(loadGtagScript, 4000);
+      });
+
+      // Conversões: cada clique para o WhatsApp e cada envio válido do formulário viram "generate_lead".
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest('[data-wa-link], a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+        if (!a) return;
+        var area = a.classList.contains("whatsapp-fab") ? "botao_flutuante" : "outro";
+        if (area === "outro") {
+          var box = a.closest("header, section, footer, nav");
+          if (box) area = box.id || box.tagName.toLowerCase();
+        }
+        gtag("event", "generate_lead", { method: "whatsapp", lead_source: area });
+      }, true);
+      document.addEventListener("submit", function (e) {
+        var f = e.target;
+        if (f && f.id === "quote-form" && f.checkValidity()) {
+          gtag("event", "generate_lead", { method: "formulario", lead_source: "formulario" });
+        }
+      }, true);
     })();
   </script>
 </head>
@@ -160,15 +201,7 @@
       </div>
 
       <div class="hero__content">
-        <img
-          class="hero__wireframe"
-          src="assets/img/hero/render-stand-perego-wireframe-light.webp"
-          srcset="assets/img/hero/render-stand-perego-wireframe-light.webp 1290w, assets/img/hero/render-stand-perego-wireframe-light-800w.webp 800w"
-          sizes="(min-width: 64rem) 52vw, 100vw"
-          alt=""
-          width="1290"
-          height="762"
-        />
+        <img class="hero__wireframe" src="assets/img/hero/stand-blueprint-transparente.svg?v=20261029-svgo" alt="" width="1238" height="907" aria-hidden="true" loading="lazy" decoding="async" />
 
         <div class="hero__text">
           <h1 class="hero__headline" id="hero-heading">
@@ -201,50 +234,50 @@
       <h2 class="sr-only" id="clientes-heading">Clientes atendidos</h2>
       <div class="clients__track">
         <div class="clients__group">
-          <span class="clients__item">Perego / Lentes Correct <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Almata Química <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Kerootica <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Obra Prima <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">KX3 <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Metalring / AGEL <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Geloni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Schultz <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">3D Criar <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Diesel Venom <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">4x4 Import <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Grupo Linares <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">M2 Ferramentas <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Coleção.Moda <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Automatisa <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Sanex <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Cofemo <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Fergraf <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Guabifios <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Squadroni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Upton <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Perego / Lentes Correct <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Almata Química <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Kerootica <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Obra Prima <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">KX3 <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Metalring / AGEL <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Geloni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Schultz <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">3D Criar <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Diesel Venom <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">4x4 Import <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Grupo Linares <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">M2 Ferramentas <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Coleção.Moda <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Automatisa <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Sanex <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Cofemo <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Fergraf <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Guabifios <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Squadroni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Upton <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
         </div>
         <div class="clients__group" aria-hidden="true">
-          <span class="clients__item">Perego / Lentes Correct <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Almata Química <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Kerootica <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Obra Prima <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">KX3 <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Metalring / AGEL <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Geloni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Schultz <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">3D Criar <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Diesel Venom <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">4x4 Import <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Grupo Linares <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">M2 Ferramentas <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Coleção.Moda <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Automatisa <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Sanex <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Cofemo <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Fergraf <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Guabifios <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Squadroni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
-          <span class="clients__item">Upton <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" loading="lazy" /></span>
+          <span class="clients__item">Perego / Lentes Correct <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Almata Química <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Kerootica <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Obra Prima <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">KX3 <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Metalring / AGEL <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Geloni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Schultz <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">3D Criar <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Diesel Venom <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">4x4 Import <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Grupo Linares <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">M2 Ferramentas <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Coleção.Moda <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Automatisa <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Sanex <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Cofemo <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Fergraf <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Guabifios <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Squadroni <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
+          <span class="clients__item">Upton <img src="assets/brand/logo/svg/simbolo-branco.svg" alt="" width="18" height="18" /></span>
         </div>
       </div>
     </section>
@@ -296,7 +329,7 @@
               <img
                 src="assets/img/v2/diferencial-grafica-acabamento-1800w.webp"
                 srcset="assets/img/v2/diferencial-grafica-acabamento-480w.webp 480w, assets/img/v2/diferencial-grafica-acabamento-768w.webp 768w, assets/img/v2/diferencial-grafica-acabamento-1200w.webp 1200w, assets/img/v2/diferencial-grafica-acabamento-1800w.webp 1800w"
-                sizes="(min-width: 56rem) min(42vw, 508px), (min-width: 48rem) 93vw, 82vw"
+                sizes="(min-width: 56rem) min(48.3vw, 584px), (min-width: 48rem) 107vw, 82vw"
                 alt="Equipe da Conceito instalando o acabamento final de um stand"
                 width="1800"
                 height="3200"
@@ -334,7 +367,7 @@
               <img
                 src="assets/img/v2/diferencial-equipe-1800w.webp"
                 srcset="assets/img/v2/diferencial-equipe-480w.webp 480w, assets/img/v2/diferencial-equipe-768w.webp 768w, assets/img/v2/diferencial-equipe-1200w.webp 1200w, assets/img/v2/diferencial-equipe-1800w.webp 1800w"
-                sizes="(min-width: 56rem) min(42vw, 508px), (min-width: 48rem) 93vw, 82vw"
+                sizes="(min-width: 56rem) min(48.3vw, 584px), (min-width: 48rem) 107vw, 82vw"
                 alt="Montador da Conceito com camiseta da marca em um estande de feira"
                 width="1800"
                 height="2400"
@@ -392,77 +425,85 @@
       <div class="container">
         <h2 class="section__heading" id="portfolio-heading">Portfólio</h2>
 
-        <div class="portfolio__grid" role="region" aria-label="Portfólio da Conceito, carrossel" tabindex="0">
-          <figure id="portfolio-obra-prima" class="portfolio__item" tabindex="0">
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-obra-prima-1600w.webp"
-                srcset="assets/img/v2/portfolio-obra-prima-640w.webp 640w, assets/img/v2/portfolio-obra-prima-1024w.webp 1024w, assets/img/v2/portfolio-obra-prima-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
-                alt="Estande da Obra Prima montado pela Conceito na ProWine 2026"
-                width="1600"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+        <div class="portfolio__grid" role="region" aria-label="Portfólio da Conceito" tabindex="0">
+          <figure id="portfolio-obra-prima" class="portfolio__item">
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-obra-prima-1600w.webp"
+                  srcset="assets/img/v2/portfolio-obra-prima-640w.webp 640w, assets/img/v2/portfolio-obra-prima-1024w.webp 1024w, assets/img/v2/portfolio-obra-prima-1600w.webp 1600w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Obra Prima montado pela Conceito na ProWine 2026"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Obra Prima</span>
               <span class="portfolio__fair">ProWine 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-perego-lentes" class="portfolio__item portfolio__item--tall" tabindex="0">
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-perego-lentes-1086w.webp"
-                srcset="assets/img/v2/portfolio-perego-lentes-480w.webp 480w, assets/img/v2/portfolio-perego-lentes-768w.webp 768w, assets/img/v2/portfolio-perego-lentes-1086w.webp 1086w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
-                alt="Estande da Perego Lentes montado pela Conceito na Expoótica 2026"
-                width="1086"
-                height="1448"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-perego-lentes" class="portfolio__item portfolio__item--tall">
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-perego-lentes-1086w.webp"
+                  srcset="assets/img/v2/portfolio-perego-lentes-480w.webp 480w, assets/img/v2/portfolio-perego-lentes-768w.webp 768w, assets/img/v2/portfolio-perego-lentes-1086w.webp 1086w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Perego Lentes montado pela Conceito na Expoótica 2026"
+                  width="1086"
+                  height="1448"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Perego Lentes</span>
               <span class="portfolio__fair">Expoótica 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-upton" class="portfolio__item portfolio__item--feature" tabindex="0">
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-upton-1448w.webp"
-                srcset="assets/img/v2/portfolio-upton-640w.webp 640w, assets/img/v2/portfolio-upton-1024w.webp 1024w, assets/img/v2/portfolio-upton-1448w.webp 1448w"
-                sizes="(min-width: 48rem) min(44vw, 33rem), calc(100vw - 2.5rem)"
-                alt="Estande da Upton montado pela Conceito na Fispal Tec 2026"
-                width="1448"
-                height="1086"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-upton" class="portfolio__item portfolio__item--feature">
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-upton-1448w.webp"
+                  srcset="assets/img/v2/portfolio-upton-640w.webp 640w, assets/img/v2/portfolio-upton-1024w.webp 1024w, assets/img/v2/portfolio-upton-1448w.webp 1448w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Upton montado pela Conceito na Fispal Tec 2026"
+                  width="1448"
+                  height="1086"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Upton</span>
               <span class="portfolio__fair">Fispal Tec 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-fergraf" class="portfolio__item portfolio__item--tall" tabindex="0">
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-fergraf-1086w.webp"
-                srcset="assets/img/v2/portfolio-fergraf-480w.webp 480w, assets/img/v2/portfolio-fergraf-768w.webp 768w, assets/img/v2/portfolio-fergraf-1086w.webp 1086w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
-                alt="Estande da Fergraf montado pela Conceito na Formóbile 2026"
-                width="1086"
-                height="1448"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-fergraf" class="portfolio__item portfolio__item--tall">
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-fergraf-1086w.webp"
+                  srcset="assets/img/v2/portfolio-fergraf-480w.webp 480w, assets/img/v2/portfolio-fergraf-768w.webp 768w, assets/img/v2/portfolio-fergraf-1086w.webp 1086w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Fergraf montado pela Conceito na Formóbile 2026"
+                  width="1086"
+                  height="1448"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Fergraf</span>
               <span class="portfolio__fair">Formóbile 2026</span>
@@ -471,114 +512,126 @@
 
           <button type="button" class="btn btn--primary btn--primary-on-dark portfolio__more" aria-expanded="false" aria-controls="portfolio-cofemo portfolio-guabifios portfolio-squadroni portfolio-almata-quimica portfolio-kx3-eletrolar portfolio-kx3-eletrolar-2">Ver mais projetos</button>
 
-          <figure id="portfolio-cofemo" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-cofemo-1371w.webp"
-                srcset="assets/img/v2/portfolio-cofemo-640w.webp 640w, assets/img/v2/portfolio-cofemo-1024w.webp 1024w, assets/img/v2/portfolio-cofemo-1371w.webp 1371w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
-                alt="Estande da Cofemo montado pela Conceito na Formóbile 2026"
-                width="1371"
-                height="898"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-cofemo" class="portfolio__item portfolio__item--wide" hidden>
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-cofemo-1371w.webp"
+                  srcset="assets/img/v2/portfolio-cofemo-640w.webp 640w, assets/img/v2/portfolio-cofemo-1024w.webp 1024w, assets/img/v2/portfolio-cofemo-1371w.webp 1371w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Cofemo montado pela Conceito na Formóbile 2026"
+                  width="1371"
+                  height="898"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Cofemo</span>
               <span class="portfolio__fair">Formóbile 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-guabifios" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-guabifios-1600w.webp"
-                srcset="assets/img/v2/portfolio-guabifios-640w.webp 640w, assets/img/v2/portfolio-guabifios-1024w.webp 1024w, assets/img/v2/portfolio-guabifios-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
-                alt="Estande da Guabifios montado pela Conceito na Febratex 2026"
-                width="1600"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-guabifios" class="portfolio__item portfolio__item--wide" hidden>
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-guabifios-1600w.webp"
+                  srcset="assets/img/v2/portfolio-guabifios-640w.webp 640w, assets/img/v2/portfolio-guabifios-1024w.webp 1024w, assets/img/v2/portfolio-guabifios-1600w.webp 1600w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Guabifios montado pela Conceito na Febratex 2026"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Guabifios</span>
               <span class="portfolio__fair">Febratex 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-squadroni" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-squadroni-1600w.webp"
-                srcset="assets/img/v2/portfolio-squadroni-640w.webp 640w, assets/img/v2/portfolio-squadroni-1024w.webp 1024w, assets/img/v2/portfolio-squadroni-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
-                alt="Estande da Squadroni montado pela Conceito na Formóbile 2026"
-                width="1600"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-squadroni" class="portfolio__item portfolio__item--wide" hidden>
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-squadroni-1600w.webp"
+                  srcset="assets/img/v2/portfolio-squadroni-640w.webp 640w, assets/img/v2/portfolio-squadroni-1024w.webp 1024w, assets/img/v2/portfolio-squadroni-1600w.webp 1600w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Squadroni montado pela Conceito na Formóbile 2026"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Squadroni</span>
               <span class="portfolio__fair">Formóbile 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-almata-quimica" class="portfolio__item" tabindex="0" hidden>
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-almata-quimica-1600w.webp"
-                srcset="assets/img/v2/portfolio-almata-quimica-640w.webp 640w, assets/img/v2/portfolio-almata-quimica-1024w.webp 1024w, assets/img/v2/portfolio-almata-quimica-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(21vw, 16rem), calc(100vw - 2.5rem)"
-                alt="Estande da Almata Química montado pela Conceito na Formóbile 2026"
-                width="1600"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-almata-quimica" class="portfolio__item" hidden>
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-almata-quimica-1600w.webp"
+                  srcset="assets/img/v2/portfolio-almata-quimica-640w.webp 640w, assets/img/v2/portfolio-almata-quimica-1024w.webp 1024w, assets/img/v2/portfolio-almata-quimica-1600w.webp 1600w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da Almata Química montado pela Conceito na Formóbile 2026"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">Almata Química</span>
               <span class="portfolio__fair">Formóbile 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-kx3-eletrolar" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-kx3-eletrolar-1600w.webp"
-                srcset="assets/img/v2/portfolio-kx3-eletrolar-640w.webp 640w, assets/img/v2/portfolio-kx3-eletrolar-1024w.webp 1024w, assets/img/v2/portfolio-kx3-eletrolar-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
-                alt="Estande da KX3 Acessórios Automotivos montado pela Conceito na Eletrolar 2026"
-                width="1600"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-kx3-eletrolar" class="portfolio__item portfolio__item--wide" hidden>
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-kx3-eletrolar-1600w.webp"
+                  srcset="assets/img/v2/portfolio-kx3-eletrolar-640w.webp 640w, assets/img/v2/portfolio-kx3-eletrolar-1024w.webp 1024w, assets/img/v2/portfolio-kx3-eletrolar-1600w.webp 1600w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da KX3 Acessórios Automotivos montado pela Conceito na Eletrolar 2026"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">KX3 Acessórios</span>
               <span class="portfolio__fair">Eletrolar 2026</span>
             </figcaption>
           </figure>
 
-          <figure id="portfolio-kx3-eletrolar-2" class="portfolio__item portfolio__item--wide" tabindex="0" hidden>
-            <div class="portfolio__frame">
-              <img
-                src="assets/img/v2/portfolio-kx3-eletrolar-2-1600w.webp"
-                srcset="assets/img/v2/portfolio-kx3-eletrolar-2-640w.webp 640w, assets/img/v2/portfolio-kx3-eletrolar-2-1024w.webp 1024w, assets/img/v2/portfolio-kx3-eletrolar-2-1600w.webp 1600w"
-                sizes="(min-width: 48rem) min(48.4vw, 36.25rem), calc(100vw - 2.5rem)"
-                alt="Estande da KX3 Acessórios Automotivos montado pela Conceito na Eletrolar 2026, vista frontal"
-                width="1600"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          <figure id="portfolio-kx3-eletrolar-2" class="portfolio__item portfolio__item--wide" hidden>
+            <button type="button" class="portfolio__trigger">
+              <div class="portfolio__frame">
+                <img
+                  src="assets/img/v2/portfolio-kx3-eletrolar-2-1600w.webp"
+                  srcset="assets/img/v2/portfolio-kx3-eletrolar-2-640w.webp 640w, assets/img/v2/portfolio-kx3-eletrolar-2-1024w.webp 1024w, assets/img/v2/portfolio-kx3-eletrolar-2-1600w.webp 1600w"
+                  sizes="(min-width: 48rem) min(55vw, 42rem), calc(100vw - 2.5rem)"
+                  alt="Estande da KX3 Acessórios Automotivos montado pela Conceito na Eletrolar 2026, vista frontal"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
             <figcaption class="portfolio__caption">
               <span class="portfolio__client">KX3 Acessórios</span>
               <span class="portfolio__fair">Eletrolar 2026</span>
@@ -698,7 +751,7 @@
         </div>
       </div>
 
-      <p class="footer__bottom">&copy; <span id="footer-year"></span> <span data-cfg="NOME_NO_TEXTO">Conceito Stands</span>. Todos os direitos reservados.</p>
+      <p class="footer__bottom">&copy; <span id="footer-year"></span> <span data-cfg="NOME_NO_TEXTO">Conceito Stands</span>. Todos os direitos reservados. <a class="footer__legal" href="politica-de-privacidade.html">Política de privacidade</a></p>
     </div>
   </footer>
 
@@ -722,13 +775,36 @@
     </figure>
   </div>
 
-  <script src="js/config.js"></script>
-  <script src="js/main.js" defer></script>
+  <script src="js/config.js?v=20261029"></script>
+  <script src="js/main.js?v=20261029-perf3" defer></script>
+  <script src="js/portfolio-gallery.js?v=2" defer></script>
 
   <!-- GSAP 3.13+ (core, ScrollTrigger, SplitText) via CDN, antes de animations.js. -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha256-lsAbgfRKMpDitFMvVeLJU0sq3EMnOhnzdWsstB8P0LY=" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha256-MIIZOQ5eO4TNoMSB5wyqmCCIOuEL2kTm6aFJqBqsSz8=" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" integrity="sha256-XlGeokcPqhXKTU8n6SY+WQbAfANKm0dxFk3uEIE2Vjo=" crossorigin="anonymous" defer></script>
-  <script src="js/animations.js" defer></script>
+  <script src="js/animations.js?v=20261029-perf3" defer></script>
+  <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
+    <p class="cookie-banner__text">Usamos cookies do Google Analytics para entender como o site é usado. Saiba mais na <a href="politica-de-privacidade.html">Política de privacidade</a>.</p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="btn btn--primary btn--primary-on-dark" data-consent="granted">Aceitar</button>
+      <button type="button" class="btn btn--outline-on-dark" data-consent="denied">Recusar</button>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var banner = document.getElementById("cookie-banner");
+      if (!banner || window.csConsent) return;
+      banner.hidden = false;
+      banner.addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-consent]");
+        if (!btn) return;
+        var value = btn.getAttribute("data-consent");
+        try { localStorage.setItem("cs-consent", value); } catch (err) {}
+        if (window.gtag) gtag("consent", "update", { analytics_storage: value });
+        banner.hidden = true;
+      });
+    })();
+  </script>
 </body>
 </html>

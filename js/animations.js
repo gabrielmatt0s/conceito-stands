@@ -26,6 +26,30 @@
     gsap.from(items, tweenVars);
   }
 
+  // ---------- Header: esconde ao rolar para baixo, mostra ao rolar para cima ----------
+  // Só troca uma classe (transform, ver css/style.css); a cor (header--scrolled)
+  // continua feita por IntersectionObserver em js/main.js, sem relação com isto.
+  // Perto do topo (scroll < 120px) ou com o painel mobile aberto, nunca esconde.
+
+  function initHeaderHide() {
+    var header = document.querySelector(".header");
+    if (!header) return;
+
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 0,
+      end: "max",
+      onUpdate: function (self) {
+        if (document.body.classList.contains("nav-open")) return;
+        if (self.scroll() < 120) {
+          header.classList.remove("header--hidden");
+          return;
+        }
+        header.classList.toggle("header--hidden", self.direction === 1);
+      },
+    });
+  }
+
   // ---------- 1. Hero: vídeo e wireframe de fundo ----------
   // Título, linha de apoio e CTAs NÃO entram aqui: a entrada deles é CSS puro
   // (ver .hero__headline-line-inner, .hero__lede e .hero__actions .btn em
@@ -33,18 +57,39 @@
   // Isso corrige o LCP, que antes só pintava quando SplitText terminava.
 
   function initHero() {
-    var media = document.querySelector(".hero__media video");
     var wireframe = document.querySelector(".hero__wireframe");
-    if (!media && !wireframe) return;
+    if (!wireframe) return;
 
     var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    if (media) {
-      tl.from(media, { scale: 1.06, duration: 1.4, ease: "power2.out" }, 0);
-    }
+    // O video permanece no enquadramento final desde o primeiro quadro.
     if (wireframe) {
       gsap.set(wireframe, { opacity: 0 });
       tl.to(wireframe, { opacity: 0.6, duration: 1.3, ease: "sine.out" }, 0.1);
+    }
+  }
+
+  // ---------- 1b. Hero: saída (parallax/fade) ao rolar para fora ----------
+  // Só a saída. O H1 não entra aqui (regra do projeto: nunca animar o H1 via
+  // JS), só o vídeo/wireframe e a linha de apoio + CTAs, enquanto o hero
+  // inteiro sai da tela rolando.
+
+  function initHeroExit() {
+    var hero = document.querySelector(".hero");
+    var media = document.querySelector(".hero__media");
+    var wireframe = document.querySelector(".hero__wireframe");
+    var lede = document.querySelector(".hero__lede");
+    var actions = document.querySelector(".hero__actions");
+    if (!hero) return;
+
+    var tl = gsap.timeline({
+      scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
+    });
+
+    if (media) tl.to(media, { y: 40, autoAlpha: 0.5, ease: "none" }, 0);
+    if (wireframe) tl.to(wireframe, { autoAlpha: 0, ease: "none" }, 0);
+    if (lede || actions) {
+      tl.to([lede, actions].filter(Boolean), { y: -20, autoAlpha: 0, ease: "none" }, 0);
     }
   }
 
@@ -126,8 +171,14 @@
     var steps = gsap.utils.toArray(".process__step");
     if (!track || !bar || !steps.length) return;
 
-    var lights = document.querySelectorAll(".process__icon, .process__number");
-    gsap.set(lights, { opacity: 0.35 });
+    var icons = document.querySelectorAll(".process__icon");
+    var numbers = document.querySelectorAll(".process__number");
+    gsap.set(icons, { opacity: 0.35 });
+    // 0.88, não 0.35: span.process__number é texto real (ícone é só
+    // decorativo). Em 0.35 o teal sobre o fundo claro cai pra 1.73:1 de
+    // contraste; 0.88 é o mínimo que garante AA (4.5:1) nesse par de cores.
+    gsap.set(numbers, { opacity: 0.88 });
+    gsap.set(icons, { scale: 0.82 });
 
     var axisProp = isDesktop ? "scaleX" : "scaleY";
     gsap.set(bar, { transformOrigin: isDesktop ? "left" : "top" });
@@ -151,34 +202,74 @@
       var pos = gsap.utils.mapRange(0, Math.max(steps.length - 1, 1), 0.1, 0.9, i);
       tl.to(
         step.querySelectorAll(".process__icon, .process__number"),
-        { opacity: 1, duration: 0.06, ease: "none" },
+        { opacity: 1, duration: 0.08, ease: "none" },
+        pos
+      ).to(
+        step.querySelectorAll(".process__icon"),
+        { scale: 1, duration: 0.08, ease: "back.out(2)" },
         pos
       );
     });
   }
 
-  // ---------- 7. Portfólio: fade + scale, stagger 40ms, uma vez + parallax nas fotos largas ----------
+  // ---------- 7. Portfólio: revelação com clip-path, uma vez por item ----------
+  // Mobile (lista vertical) e desktop (bento) revelam igual, cada um com seu
+  // próprio gatilho. Sem zoom/parallax na foto: aqui as fotos aparecem
+  // inteiras, sem corte (ver .portfolio__item .portfolio__frame img em
+  // css/style.css), então deslocar a imagem por dentro do card distorceria
+  // esse enquadramento deliberado.
+  // Itens que só existem depois do clique em "Ver mais projetos" ficam de
+  // fora: com display:none no load, o ScrollTrigger não consegue medir a
+  // posição deles (ficariam presos invisíveis); eles já têm seu próprio fade
+  // em js/main.js quando revelados.
 
   function initPortfolio(isDesktop) {
-    // Mesmo motivo do Diferenciais: no mobile isso é um carrossel horizontal,
-    // sem relação com a posição vertical de scroll que dispararia a entrada.
-    if (!isDesktop) return;
+    var items = gsap.utils.toArray(".portfolio__item").filter(function (item) {
+      return window.getComputedStyle(item).display !== "none";
+    });
+    if (!items.length) return;
 
-    var items = gsap.utils.toArray(".portfolio__item");
-    revealOnce(
-      items,
-      { autoAlpha: 0, scale: 0.97, duration: 0.5, ease: "power2.out", stagger: 0.04 },
-      { trigger: ".portfolio__grid", start: "top 85%" }
-    );
+    function addReveal(item, position, timeline) {
+      var frame = item.querySelector(".portfolio__frame");
+      timeline.from(item, { autoAlpha: 0, y: 16, duration: 0.5, ease: "power2.out" }, position);
+      if (frame) {
+        timeline.from(
+          frame,
+          { clipPath: "inset(0% 0% 100% 0%)", duration: 0.6, ease: "power2.out" },
+          position
+        );
+      }
+    }
 
-    gsap.utils.toArray(".portfolio__item--wide .portfolio__frame img").forEach(function (img) {
-      // Desliga a transição CSS de hover para o scrub não brigar com ela.
-      gsap.set(img, { scale: 1.1, transition: "none" });
-      gsap.to(img, {
-        y: 24,
-        ease: "none",
-        scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: 0.6 },
+    if (isDesktop) {
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: ".portfolio__grid", start: "top 85%", once: true },
       });
+      items.forEach(function (item, i) {
+        addReveal(item, i * 0.08, tl);
+      });
+    } else {
+      items.forEach(function (item) {
+        var itemTl = gsap.timeline({
+          scrollTrigger: { trigger: item, start: "top 88%", once: true },
+        });
+        addReveal(item, 0, itemTl);
+      });
+    }
+  }
+
+  // ---------- Portfólio mobile: "Ver mais projetos" muda a altura da página ----------
+  // As fotos reveladas empurram o Manifesto, o CTA e o Rodapé para baixo, então
+  // os ScrollTriggers deles (medidos no load, antes desse bloco existir) ficam
+  // desatualizados. O atraso casa com o fade de 300ms feito em js/main.js.
+
+  function initPortfolioExpandRefresh() {
+    var moreBtn = document.querySelector(".portfolio__more");
+    if (!moreBtn) return;
+    moreBtn.addEventListener("click", function () {
+      window.setTimeout(function () {
+        ScrollTrigger.refresh();
+      }, 340);
     });
   }
 
@@ -192,6 +283,10 @@
       SplitText.create(quote, {
         type: "words",
         autoSplit: true,
+        // aria:"none" evita o aria-label (texto duplicado) que o SplitText
+        // injetaria por padrão no elemento original; sem aria-hidden nas
+        // palavras, o texto real continua exposto e legível por leitor de tela.
+        aria: "none",
         onSplit: function (self) {
           return gsap.fromTo(
             self.words,
@@ -226,7 +321,38 @@
     }
   }
 
-  // ---------- 10. Botão flutuante do WhatsApp: dois pulsos só na primeira aparição ----------
+  // ---------- 9. CTA final: título, apoio e botão com mais presença, uma vez ----------
+
+  function initCta() {
+    var head = document.querySelector(".cta__head");
+    var submitRow = document.querySelector(".cta__submit-row");
+    if (!head && !submitRow) return;
+
+    var tl = gsap.timeline({
+      scrollTrigger: { trigger: "#contato", start: "top 70%", once: true },
+    });
+
+    if (head) {
+      tl.from(head.children, { autoAlpha: 0, y: 24, duration: 0.6, ease: "power2.out", stagger: 0.1 });
+    }
+    if (submitRow) {
+      tl.from(submitRow, { autoAlpha: 0, y: 16, duration: 0.5, ease: "power2.out" }, head ? "-=0.2" : 0);
+    }
+  }
+
+  // ---------- 10. Rodapé: colunas com entrada suave, uma vez ----------
+
+  function initFooter() {
+    var grid = document.querySelector(".footer__grid");
+    if (!grid) return;
+    revealOnce(
+      gsap.utils.toArray(grid.children),
+      { autoAlpha: 0, y: 16, duration: 0.5, ease: "power2.out", stagger: 0.06 },
+      { trigger: grid, start: "top 85%" }
+    );
+  }
+
+  // ---------- 11. Botão flutuante do WhatsApp: dois pulsos só na primeira aparição ----------
   // (o fade/aparecer e sumir já é feito via classe CSS em js/main.js; aqui só o pulso.)
 
   function initWhatsappPulse() {
@@ -288,14 +414,19 @@
         return;
       }
 
+      initHeaderHide();
+
       fontsReady.then(function () {
         initHero();
+        initHeroExit();
         initSectionHeadings();
         initServices();
         initDiferenciais(conditions.isDesktop);
         initProcesso(conditions.isDesktop);
         initPortfolio(conditions.isDesktop);
         initManifesto();
+        initCta();
+        initFooter();
         initWhatsappPulse();
         // Sem refresh() aqui: refreshAfterAssets() já faz o único recálculo
         // necessário, depois que fontes E imagens terminarem de carregar.
@@ -303,5 +434,6 @@
     }
   );
 
+  initPortfolioExpandRefresh();
   refreshAfterAssets();
 })();
