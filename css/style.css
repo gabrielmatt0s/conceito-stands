@@ -1561,12 +1561,14 @@ body.portfolio-lightbox-open {
   .hero__content {
     align-items: flex-end;
     /* Fallback simples primeiro. A segunda declaração só entra em navegadores
-       com suporte a lvh/svh/env (senão o calc() inteiro é inválido e é
-       ignorado, mantendo a primeira): (100lvh - 100svh) é quanto a barra do
-       Safari "come" da tela quando está expandida, somado à área segura
-       inferior (home indicator), para os botões nunca ficarem atrás da barra. */
+       com suporte a env() (senão o calc() inteiro é inválido e é ignorado,
+       mantendo a primeira). env(safe-area-inset-bottom) já cresce sozinho no
+       Safari iOS quando a barra inferior está no modo flutuante/compacto, que
+       é justamente o caso que precisa dessa folga; (100lvh - 100svh) foi
+       removido daqui porque mede a barra de cima + a de baixo juntas, e
+       sozinho deixava os botões afastados demais do rodapé. */
     padding-block: 0 var(--space-8);
-    padding-block: 0 calc(var(--space-8) + (100lvh - 100svh) + env(safe-area-inset-bottom));
+    padding-block: 0 calc(var(--space-8) + env(safe-area-inset-bottom));
   }
 
   .hero__wireframe {
@@ -1609,7 +1611,7 @@ body.portfolio-lightbox-open {
      de pausar o vídeo não ficar escondido atrás dela. */
   .hero__video-toggle {
     bottom: var(--space-4);
-    bottom: calc(var(--space-4) + (100lvh - 100svh) + env(safe-area-inset-bottom));
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
   }
 
   /* ---------- 2. Serviços: lista com hairline, número + nome na mesma linha ---------- */
