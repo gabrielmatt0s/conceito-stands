@@ -626,12 +626,12 @@ body.portfolio-lightbox-open {
   }
 }
 
-/* Abaixo de 430px a linha de apoio (texto inalterado) passa de 7 para até
-   6 linhas num Safari real (o emulador, sem a mesma fonte do sistema,
-   já quebrava em 6 com --text-lead): --text-lead (1.125rem) vira
-   --text-body (1rem) reduzido em 15%, com entrelinha um pouco mais
-   apertada. */
-@media (max-width: 429px) {
+/* Até 430px (largura real do iPhone 14/15/16 Pro Max) a linha de apoio
+   (texto inalterado) passa de 7 para até 6 linhas num Safari real (o
+   emulador, sem a mesma fonte do sistema, já quebrava em 6 com
+   --text-lead): --text-lead (1.125rem) vira --text-body (1rem) reduzido
+   em 15%, com entrelinha um pouco mais apertada. */
+@media (max-width: 430px) {
   .hero__lede {
     font-size: calc(var(--text-body) * 0.85);
     line-height: var(--leading-lead);
@@ -1543,6 +1543,11 @@ body.portfolio-lightbox-open {
   .hero {
     min-height: 100vh;
     min-height: 100dvh;
+  }
+
+  /* Título 15% menor em todo o mobile (pedido explícito do cliente). */
+  .hero__headline {
+    font-size: calc(var(--text-h1) * 0.85);
   }
 
   .hero__media {
