@@ -629,10 +629,11 @@ body.portfolio-lightbox-open {
 /* Abaixo de 430px a linha de apoio (texto inalterado) passa de 7 para até
    6 linhas num Safari real (o emulador, sem a mesma fonte do sistema,
    já quebrava em 6 com --text-lead): --text-lead (1.125rem) vira
-   --text-body (1rem), com entrelinha um pouco mais apertada. */
+   --text-body (1rem) reduzido em 15%, com entrelinha um pouco mais
+   apertada. */
 @media (max-width: 429px) {
   .hero__lede {
-    font-size: var(--text-body);
+    font-size: calc(var(--text-body) * 0.85);
     line-height: var(--leading-lead);
   }
 }
