@@ -1532,13 +1532,16 @@ body.portfolio-lightbox-open {
 
   /* ---------- 1. Hero: foto em tela cheia, texto ancorado na base ---------- */
 
-  /* 100vh primeiro (navegadores sem lvh ignoram a linha de baixo e ficam só
-     com essa); 100lvh depois, para o vídeo continuar atrás da barra inferior
-     translúcida do Safari no iOS em vez de terminar antes dela (o que deixava
-     a seção seguinte visível atrás do vidro da barra). */
+  /* 100vh primeiro (navegadores sem dvh ignoram a linha de baixo e ficam só
+     com essa); 100dvh depois, que acompanha a altura real da tela em cada
+     momento (barra do Safari expandida ou flutuando), para a hero caber
+     inteira na primeira tela sem precisar rolar E para o vídeo continuar
+     cobrindo tudo quando a barra flutua (sem a seção seguinte aparecer
+     atrás do vidro). 100lvh sozinho resolvia o segundo problema mas deixava
+     a hero mais alta que a tela inicial, exigindo rolagem. */
   .hero {
     min-height: 100vh;
-    min-height: 100lvh;
+    min-height: 100dvh;
   }
 
   .hero__media {
