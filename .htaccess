@@ -1,0 +1,17 @@
+# Conceito Stands: redirecionamentos 301 (Apache / hospedagem Locaweb)
+# A Vercel ignora este arquivo; ele só vale na Locaweb.
+
+RewriteEngine On
+
+# 1) Domínio antigo (com ou sem www) -> domínio novo, mantendo o caminho
+RewriteCond %{HTTP_HOST} ^(www\.)?conceitofeiraseeventos\.com\.br$ [NC]
+RewriteRule ^(.*)$ https://conceitostands.com.br/$1 [R=301,L]
+
+# 2) www.conceitostands.com.br -> conceitostands.com.br
+RewriteCond %{HTTP_HOST} ^www\.conceitostands\.com\.br$ [NC]
+RewriteRule ^(.*)$ https://conceitostands.com.br/$1 [R=301,L]
+
+# 3) http -> https
+# Deixar comentado até o certificado SSL estar emitido e testado na Locaweb.
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^(.*)$ https://conceitostands.com.br/$1 [R=301,L]
