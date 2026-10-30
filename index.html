@@ -42,11 +42,15 @@
     href="assets/video/hero-montagem-poster-720.webp"
     imagesrcset="assets/video/hero-montagem-poster-720.webp 720w, assets/video/hero-montagem-poster-1080.webp 1080w"
     imagesizes="(min-width: 48rem) 500px, 180px"
+    media="(min-width: 768px) and (max-width: 1023px)"
     fetchpriority="high"
   />
+  <!-- Desktop (>= 1024px): vídeo horizontal 4:3; celular (< 768px): vídeo vertical 9:19,5. Cada trecho tem enquadramento próprio. -->
+  <link rel="preload" as="image" href="assets/video/hero-montagem-poster-desktop.webp" media="(min-width: 1024px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/video/hero-montagem-poster-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
 
   <link rel="stylesheet" href="assets/brand/css/tokens.css?v=20261029" />
-  <link rel="stylesheet" href="css/style.css?v=20261029-perf5" />
+  <link rel="stylesheet" href="css/style.css?v=20261029-video1" />
   <!-- Google Analytics 4 (G-JXP76Q5CXV): só mede no domínio oficial, carrega depois da página e respeita o aviso de cookies (Consent Mode). -->
   <script>
     (function () {
@@ -168,8 +172,12 @@
           poster="assets/video/hero-montagem-poster-720.webp"
           aria-hidden="true"
         >
+          <source data-src="assets/video/hero-montagem-desktop.webm" type="video/webm" media="(min-width: 1024px)" />
+          <source data-src="assets/video/hero-montagem-desktop.mp4" type="video/mp4" media="(min-width: 1024px)" />
           <source data-src="assets/video/hero-montagem-1080.webm" type="video/webm" media="(min-width: 768px) and (min-resolution: 1.5dppx)" />
           <source data-src="assets/video/hero-montagem-1080.mp4" type="video/mp4" media="(min-width: 768px) and (min-resolution: 1.5dppx)" />
+          <source data-src="assets/video/hero-montagem-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
+          <source data-src="assets/video/hero-montagem-mobile.webm" type="video/webm" media="(max-width: 767px)" />
           <source data-src="assets/video/hero-montagem-720.mp4" type="video/mp4" />
           <source data-src="assets/video/hero-montagem-720.webm" type="video/webm" />
         </video>
@@ -181,10 +189,15 @@
             var container = document.currentScript.closest(".hero__media");
             var poster = container.querySelector(".hero__poster");
             var video = container.querySelector(".hero__video");
-            var isHighDensityDesktop = window.innerWidth >= 768 && window.devicePixelRatio >= 1.5;
-            var posterSrc = isHighDensityDesktop
-              ? "assets/video/hero-montagem-poster-1080.webp"
-              : "assets/video/hero-montagem-poster-720.webp";
+            var w = window.innerWidth;
+            var isHighDensityDesktop = w >= 768 && window.devicePixelRatio >= 1.5;
+            var posterSrc = w >= 1024
+              ? "assets/video/hero-montagem-poster-desktop.webp"
+              : w < 768
+                ? "assets/video/hero-montagem-poster-mobile.webp"
+                : isHighDensityDesktop
+                  ? "assets/video/hero-montagem-poster-1080.webp"
+                  : "assets/video/hero-montagem-poster-720.webp";
             poster.src = posterSrc;
             video.poster = posterSrc;
           })();

@@ -2032,3 +2032,9 @@ body.portfolio-lightbox-open {
   margin-left: var(--space-2);
   white-space: nowrap;
 }
+
+/* Hero desktop: vídeo próprio em 4:3, já enquadrado trecho a trecho; centraliza em vez de alinhar pelo topo. */
+@media (min-width: 64rem) {
+  .hero__poster,
+  .hero__video { object-position: center; }
+}
